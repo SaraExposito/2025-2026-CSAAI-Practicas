@@ -28,18 +28,20 @@ clear: both;
 }
 
 #c1 {
-    background-color:#aaa;
+    background-color: rgba(5, 53, 121, 0.731); /* Azul claro con 70% de opacidad */
+    border: 2px solid rgb(34, 1, 180); /* Estilo de borde como el de Lisa */
 }
 
 #c2 {
-    background-color:#bbb;
+    background-color: rgba(252, 158, 6, 0.478); /* Amarillo claro con 60% de opacidad */
+    border: 2px solid rgb(255, 132, 0);
 }
 
 /* estilos para imágenes https://www.w3schools.com/css/css3_images.asp */
 /* posicionamiento de imágenes https://www.w3schools.com/css/css_positioning.asp */
 
 img {
-    width: 100%;
+    width: 50%;
     height: auto;
 }
 
@@ -63,3 +65,32 @@ img {
 }
 
 /* Más sobre diseño web responsive https://www.w3schools.com/css/css_rwd_intro.asp */
+
+/* --- Ajustes de texto --- */
+h2 {
+    font-size: 22px;
+    color: #ffffff;
+}
+
+#c1 p, #c1 li {
+    font-size: 13px; /* El texto de la columna izquierda suele ser más pequeño */
+}
+
+#c2 p {
+    font-size: 15px; /* El texto principal un poco más grande */
+}
+
+
+body {
+    /* Ruta de tu imagen */
+    background-image: url(fondo3.jpg); 
+    
+    /* Centrar la imagen y que no se repita */
+    background-repeat: no-repeat;
+    background-position: center;
+    
+    /* Que la imagen cubra toda la pantalla o se quede fija al hacer scroll */
+    /*Si quiero que se ajuste pongo 50% en size y el otro lo quito */
+    background-size: cover; 
+    background-attachment: fixed;
+}
