@@ -1,5 +1,9 @@
 /* Practicando con CSS: Hola mundo otra vez... */
 body {
-  background-color: aquamarine;
+  background-color: lightblue;
   color: blue
+}
+
+h1  {
+  color: white;
 }
