@@ -1,96 +1,137 @@
-/* https://www.w3schools.com/howto/howto_css_two_columns.asp */
-/* https://developer.mozilla.org/es/docs/Web/CSS/box-sizing */
-/* Así definimos el comportamiento de caja para todos los elementos */
 * {
     box-sizing: border-box;
-  }
-  
-/* Crear columnas de ancho diferente que se colocan una a continuación de la otra */
-.columna {
-float: left;
-padding: 10px;
-min-height: 500px;
 }
-
-.izquierda {
-width: 25%;
-}
-
-.derecha {
-width: 75%;
-}
-
-/* Clear floats despues de las columnas para eliminar la superposición */
-.filla:after {
-content: "";
-display: table;
-clear: both;
-}
-
-#c1 {
-    background-color: rgba(5, 53, 121, 0.731); /* Azul claro con 70% de opacidad */
-    border: 2px solid rgb(34, 1, 180); /* Estilo de borde como el de Lisa */
-}
-
-#c2 {
-    background-color: rgba(252, 158, 6, 0.478); /* Amarillo claro con 60% de opacidad */
-    border: 2px solid rgb(255, 132, 0);
-}
-
-/* estilos para imágenes https://www.w3schools.com/css/css3_images.asp */
-/* posicionamiento de imágenes https://www.w3schools.com/css/css_positioning.asp */
-
-img {
-    width: 50%;
-    height: auto;
-}
-
-.iresponsive {
-    padding: 0 6px;
-    float: left;
-    width: 50%;
-  }
-
-/* Responsive layout - cuando el ancho de pantalla es menor a 600px, muestra las columnas apiladas. */
-/* Así conseguimos que el contenido se vea bien en dispositvos móviles */
-
-@media screen and (max-width: 600px) {
-    .columna {
-      width: 100%;
-    }
-
-    .iresponsive {
-        width: 100%;
-    }
-}
-
-/* Más sobre diseño web responsive https://www.w3schools.com/css/css_rwd_intro.asp */
-
-/* --- Ajustes de texto --- */
-h2 {
-    font-size: 22px;
-    color: #ffffff;
-}
-
-#c1 p, #c1 li {
-    font-size: 13px; /* El texto de la columna izquierda suele ser más pequeño */
-}
-
-#c2 p {
-    font-size: 15px; /* El texto principal un poco más grande */
-}
-
 
 body {
-    /* Ruta de tu imagen */
-    background-image: url(fondo3.jpg); 
-    
-    /* Centrar la imagen y que no se repita */
-    background-repeat: no-repeat;
-    background-position: center;
-    
-    /* Que la imagen cubra toda la pantalla o se quede fija al hacer scroll */
-    /*Si quiero que se ajuste pongo 50% en size y el otro lo quito */
-    background-size: cover; 
+    background-image: url('fondoo.jpg');
+    background-size: cover;
     background-attachment: fixed;
+    font-family: Arial, sans-serif;
+    margin: 0;
+}
+
+/* Navegación */
+nav {
+    background-color: #053579;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+nav a {
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+}
+
+nav a:hover {
+    background-color: #ff8400;
+    color: black;
+}
+
+/* Columnas y Fila */
+.columna {
+    float: left;
+    padding: 10px;
+}
+
+.izquierda { width: 25%; text-align: center; }
+.derecha { width: 75%; }
+
+.fila:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* IZQUIERDA: Recuadro azul solo para la foto y texto en negro */
+#c1 {
+    background-color: transparent;
+    border: none;
+    color: black; /* Texto de contacto en negro */
+}
+
+.contenedor-foto {
+    background-color: rgba(5, 53, 121, 0.731);
+    border: 2px solid rgb(34, 1, 180);
+    border-radius: 10px;
+    padding: 15px;
+    display: inline-block;
+    margin-bottom: 15px;
+}
+
+#imghtml {
+    width: 300px;
+    height: auto;
+    display: block;
+    border-radius: 5px;
+}
+
+/* DERECHA: Recuadro naranja compacto y foto debajo */
+#c2 {
+    background-color: transparent;
+    border: none;
+}
+
+.caja-habilidades {
+    background-color: rgba(206, 170, 112, 0.7);
+    border: 2px solid rgb(255, 132, 0);
+    padding: 20px;
+    border-radius: 10px;
+    display: block;      /* Cambiado a block para que ocupe su línea */
+    max-width: 600px;    /* Controlas el ancho máximo del recuadro */
+    margin-bottom: 10px; /* Espacio pequeño antes de la foto */
+}
+
+.img-miyagi {
+    max-width: 100;    /* Mismo ancho que el recuadro para que queden alineados */
+    width: 20%;
+    height: auto;
+    display: block;
+    border-radius: 5px;
+}
+.img-ali {
+    max-width: 100;    /* Mismo ancho que el recuadro para que queden alineados */
+    width: 20%;
+    height: auto;
+    display: block;
+    border-radius: 5px;
+}
+.img-johnny {
+    max-width: 100;    /* Mismo ancho que el recuadro para que queden alineados */
+    width: 20%;
+    height: auto;
+    display: block;
+    border-radius: 5px;
+}
+
+.titulo-principal {
+    text-align: center;
+    color: black;
+    font-size: 35px;
+    margin-top: 20px;
+}
+
+.galeria-fotos {
+    display: flex;          /* Alinea los hijos en fila */
+    justify-content: space-around; /* Espaciado uniforme entre fotos */
+    text-align: center;     /* Centra el texto debajo de la foto */
+    margin-top: 20px;
+}
+
+.foto-item {
+    width: 20%;             /* Controla que quepan las tres en la fila */
+}
+
+.foto-item img {
+    width: 100%;            /* La imagen ocupa todo el ancho de su contenedor */
+    height: auto;           /* Mantiene la proporción */
+    border-radius: 8px;     /* Opcional: bordes suaves */
+}
+
+/* Responsive */
+@media screen and (max-width: 800px) {
+    .izquierda, .derecha { width: 100%; }
 }

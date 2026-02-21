@@ -1,43 +1,67 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CV Dos columnas</title>
-
-   <!-- Hoja de estilo -->
-   <link rel="stylesheet" href="2c-template.css">    
-
+    <title>CV Daniel LaRusso - Inicio</title>
+    <link rel="stylesheet" href="2c-template.css">
 </head>
 <body>
-    
-    <h2>DANIEL LARUSSO</h2>
 
-    <div class="fila">
-      <div id="c1" class="columna izquierda">
-        <img id="imghtml" src="foto-perfil.jpg" alt="html5" width="200" height="200">
+    <nav>
+        <a href="index.html" class="active">Inicio</a>
+        <a href="about.html">Acerca de</a>
+        <a href="projects.html">Proyectos</a>
+    </nav>
 
-        <p>Senserit mediocrem vis ex, et dicunt deleniti gubergren mei. Mel id clita mollis repudiare. 
-            Sed ad nostro delicatissimi, postea pertinax est an. Adhuc sensibus percipitur sed te, 
-            eirmod tritani debitis nec ea. Cu vis quis gubergren.
-        </p>
-        <ul>
-            <li>Contacto</li>
-            <li>Formación</li>
-            <li>Experiencia</li>
-            <li>Acerca de</li>
-        </ul>
+  <h2 class="titulo-principal">DANIEL LARUSSO</h2>
+
+  <div class="fila">
+    <div id="c1" class="columna izquierda">
+        <div class="contenedor-foto">
+                <img id="imghtml" src="foto-perfil.jpg" alt="Daniel LaRusso" width="250">
+            </div>
+
+        <h3>Contacto</h3>
+        <p>Email: daniel.san@miyagi.com</p>
+        <p>Ubicación: Reseda, California</p>
+        <p>Fecha de nacimiento: 18/12/1966</p>
       </div>
+
       <div id="c2" class="columna derecha">
-        <h2>Columna Derecha</h2>
-        <img src="web-tech.png" alt="Tecnologías web">
-        <p>Senserit mediocrem vis ex, et dicunt deleniti gubergren mei. Mel id clita mollis repudiare. 
-            Sed ad nostro delicatissimi, postea pertinax est an. Adhuc sensibus percipitur sed te, 
-            eirmod tritani debitis nec ea. Cu vis quis gubergren.
-        </p>
+          
+          <div class="caja-habilidades">
+              <h2>Formación y Habilidades</h2>
+              <h3>Formación</h3>
+              <ul>
+                  <li>Miyagi-Do Karate: Cinturón Negro.</li>
+                  <li>Gestión Empresarial: LaRusso Auto Group.</li>
+              </ul>
+              <h3>Habilidades</h3>
+              <ul>
+                  <li>Técnica de la Grulla.</li>
+                  <li>Encerar, pulir y pintar vallas.</li>
+              </ul>
+          </div>
+
+          <div class="galeria-fotos">
+              <div class="foto-item">
+                  <img src="miyagi.jpg" alt="Mi mejor amigo" class="img-miyagi">
+                  <p>Sr. Miyagi: Mi sensei y mejor amigo.</p>
+              </div>
+
+              <div class="foto-item">
+                  <img src="ali.jpg" alt="Mi novia" class="img-ali">
+                  <p>Ali Mills: Mi primer gran amor en el Valle.</p>
+              </div>
+
+              <div class="foto-item">
+                  <img src="johnny.jpg" alt="Mi rival" class="img-johnny">
+                  <p>Johnny Lawrence: Mi eterno rival de Cobra Kai.</p>
+              </div>
+          </div>
+
       </div>
-    </div>
 
 </body>
 </html>
