@@ -135,3 +135,39 @@ nav a:hover {
 @media screen and (max-width: 800px) {
     .izquierda, .derecha { width: 100%; }
 }
+/* Estilos para la galería del Index */
+.galeria-fotos {
+    display: flex;
+    flex-wrap: wrap; /* Permite que las fotos salten de línea */
+    justify-content: center; /* Centra las fotos en la fila */
+    gap: 20px; /* Espacio entre cada foto */
+    margin-top: 30px;
+    width: 50%;
+}
+
+.foto-item {
+    /* Calculamos el ancho para que quepan 3 por fila */
+    /* (100% / 3) menos un margen para el gap */
+    flex: 0 1 calc(30% - 10px); 
+    min-width: 150px; /* Para que no se hagan demasiado pequeñas en móviles */
+    text-align: center;
+}
+
+.foto-item img {
+    width: 100%; /* La imagen se adapta al tamaño del contenedor .foto-item */
+    height: auto;
+    border-radius: 8px;
+    border: 2px solid #d4af37; /* Borde dorado para que combine con Proyectos */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease;
+}
+
+.foto-item img:hover {
+    transform: scale(1.05); /* Efecto zoom al pasar el ratón */
+}
+
+.foto-item p {
+    font-size: 0.9em;
+    margin-top: 8px;
+    color: #000000;
+}
