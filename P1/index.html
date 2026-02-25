@@ -5,6 +5,67 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CV Daniel LaRusso - Inicio</title>
     <link rel="stylesheet" href="2c-template.css">
+    <style>
+        /* Contenedor flex para alinear habilidades y video */
+        .seccion-habilidades-video {
+            display: flex;
+            align-items: stretch; /* Esto hace que ambos tengan la misma altura */
+            gap: 240px; 
+            margin-bottom: 20px;
+        }
+
+        .caja-habilidades {
+            flex: 1;
+            margin-bottom: 0 !important; /* Quitamos margen inferior para cuadrar alturas */
+        }
+
+        .contenedor-columna-video {
+            flex: 0 0 400px; /* Ancho fijo para el video */
+            display: flex;
+            flex-direction: column;
+        }
+
+        .contenedor-video-ajustado {
+            flex: 1; /* Hace que el video crezca para igualar la altura de la caja naranja */
+            display: flex;
+        }
+
+        .contenedor-video-ajustado iframe {
+            width: 100%;
+            height: 100%; /* Ocupa el 100% de la altura del contenedor */
+            border-radius: 8px; /* Bordes redondeados */
+            border: 2px solid #f39c12; /* Borde del color del tema */
+        }
+
+        .textos-video {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .titulo-video {
+            font-weight: bold;
+            color: #3d3c3c;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .subtitulo-video {
+            font-style: italic;
+            color: #e67e22; /* Color naranja para resaltar el eslogan */
+            font-weight: bold;
+        }
+
+        /* Ajuste para móviles */
+        @media (max-width: 768px) {
+            .seccion-habilidades-video {
+                flex-direction: column;
+            }
+            .contenedor-columna-video {
+                flex: none;
+                height: 300px;
+            }
+        }
+    </style>
 </head>
 <body>
 
@@ -30,44 +91,63 @@
 
       <div id="c2" class="columna derecha">
           
-          <div class="caja-habilidades">
-              <h2>Formación y Habilidades</h2>
-              <h3>Formación</h3>
-              <ul>
-                  <li>Miyagi-Do Karate: Cinturón Negro.</li>
-                  <li>Gestión Empresarial: LaRusso Auto Group.</li>
-              </ul>
-              <h3>Habilidades</h3>
-              <ul>
-                  <li>Técnica de la Grulla.</li>
-                  <li>Encerar, pulir y pintar vallas.</li>
-              </ul>
+          <div class="seccion-habilidades-video">
+              <div class="caja-habilidades">
+                  <h2>Formación y Habilidades</h2>
+                  <h3>Formación</h3>
+                  <ul>
+                      <li>Miyagi-Do Karate: Cinturón Negro.</li>
+                      <li>Gestión Empresarial: LaRusso Auto Group.</li>
+                  </ul>
+                  <h3>Habilidades</h3>
+                  <ul>
+                      <li>Técnica de la Grulla.</li>
+                      <li>Dar cera, pulir cera y pintar vallas.</li>
+                      <li>Reflejos y defensa</li>
+                  </ul>
+              </div>
+
+              <div class="contenedor-columna-video">
+                  <div class="contenedor-video-ajustado">
+                      <iframe 
+                          src="https://www.youtube.com/embed/l2t7qNQBthk" 
+                          title="YouTube video player" 
+                          frameborder="0" 
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                          allowfullscreen>
+                      </iframe>
+                  </div>
+                  <div class="textos-video">
+                      <div class="titulo-video">MI CONCESIONARIO</div>
+                      <div class="subtitulo-video">"Machacamos a la competencia"</div>
+                  </div>
+              </div>
           </div>
 
             <div class="galeria-fotos">
                 <div class="foto-item">
                     <img src="miyagi.jpg" alt="Mi mejor amigo" class="img-miyagi">
-                    <p>Sr. Miyagi: Mi sensei y mejor amigo.</p>
+                    <p><strong>Sr. Miyagi:</strong> Mi sensei y mejor amigo.</p>
                 </div>
 
                 <div class="foto-item">
                     <img src="ali.jpg" alt="Mi novia" class="img-ali">
-                    <p>Ali Mills: Mi primer gran amor en el Valle.</p>
+                    <p><strong>Ali Mills:</strong> Mi primer gran amor en el Valle.</p>
                 </div>
 
                 <div class="foto-item">
                     <img src="johnny.jpg" alt="Mi rival" class="img-johnny">
-                    <p>Johnny Lawrence: Mi eterno rival de Cobra Kai.</p>
+                    <p><strong>Johnny Lawrence:</strong> Mi primer rival de Cobra Kai.</p>
                 </div>
 
                 <div class="foto-item">
                     <img src="terry.jpg" alt="Terry Silver" class="img-terry">
-                    <p>Terry Silver: Un pasado que prefiero olvidar.</p>
+                    <p><strong>Terry Silver:</strong> Me manipuló y hacía un estilo oscuro.</p>
                 </div>
 
                 <div class="foto-item">
                     <img src="kreese.jpg" alt="John Kreese" class="img-kreese">
-                    <p>John Kreese: La cara oscura del karate en el Valle.</p>
+                    <p><strong>John Kreese:</strong> La cara oscura del karate en el Valle.</p>
                 </div>
             </div>
 

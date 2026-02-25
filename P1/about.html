@@ -5,6 +5,66 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Acerca de - Daniel LaRusso</title>
     <link rel="stylesheet" href="2c-template.css">
+    <style>
+        /* Estilos específicos para lograr la disposición deseada */
+        .img-central {
+            display: block;
+            margin: 10px auto;
+            max-width: 25%;
+            border-radius: 8px;
+        }
+        .frase-central {
+            text-align: center;
+            font-style: italic;
+            margin-bottom: 10px;
+            color: #3d3c3c;
+            font-weight: bold;
+            display: table;
+            margin-left: auto;
+            margin-right: auto;
+            /* Efecto de subrayado tipo resaltador/marcador */
+            background-image: linear-gradient(to top, rgba(255, 255, 255, 0.4) 100%, transparent 40%);
+            padding: 0 5px;
+        }
+        .contenedor-flex {
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start; /* Asegura que todo empiece desde la izquierda */
+            gap: 60px; 
+            margin-top: 20px;
+            margin-left: 50px; 
+            margin-right: 40px 
+        }
+
+        .info-personal {
+            flex: 1; /* Permite que ambos cuadros de texto crezcan por igual */
+            max-width: 1000px; /* Reducimos un poco el máximo para dejar espacio a la imagen */
+        }
+
+        .img-derecha {
+            max-width: 395px; /* Ajustamos el tamaño de la imagen para que no sature la fila */
+            border-radius: 8px;
+            display: block;
+        }
+
+        .btn-volver {
+            display: block;
+            width: fit-content;
+            margin: 40px auto;
+            padding: 10px 25px;
+            background-color: transparent;
+            color: #d4af37;
+            border: 1px solid #d4af37;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+        .btn-volver:hover {
+            background-color: #d4af37;
+            color: #000;
+        }
+
+    </style>
 </head>
 <body>
 
@@ -17,29 +77,53 @@
     <h2 class="titulo-principal">SOBRE MÍ</h2>
 
     <div class="fila">
-        <div id="c1" class="columna izquierda">
-            <div class="contenedor-foto">
-                <img src="foto-perfil.jpg" alt="Daniel LaRusso" width="250">
+        <img src="amigos.jpg" alt="Daniel y Sr. Miyagi entrenando" class="img-central">
+        <p class="frase-central">"Si el karate se usa para defender el honor, significa algo. Si se usa para defender un trofeo, no significa nada."</p>
+    </div>
+
+    <div class="fila contenedor-flex">
+        
+        <div class="info-personal">
+            <div class="caja-habilidades">
+                <h1>Mi Historia</h1>
+                <p>Originalmente de Nueva Jersey, me mudé a California donde mi vida cambió gracias al Sr. Miyagi. No solo aprendí karate, sino lecciones de vida que aplico en mi negocio hoy en día.</p>
+                <p>Pasé de ser un adolescente acosado a convertirme en empresario y maestro de karate.</p>
+                <h3>Johnny y yo</h3>
+                <p>Empezó como mi enemigo, pero nos dimos cuenta de que teníamos enemigos comunes y eso nos unió. Empezamos a colaborar para proteger a nuestros alumnos y terminamos respetándonos y uniéndonos en Miyagi-Do. Juntos ganamos el Sekai Taikai en Barcelona</p>
+                
             </div>
-            <h3>Filosofía</h3>
-            <p>"Si el karate se usa para defender el honor, significa algo. Si se usa para defender un trofeo, no significa nada."</p>
         </div>
 
-        <div id="c2" class="columna derecha">
+        <div class="columna-imagen">
+            <img src="mayores.jpg" alt="Daniel LaRusso y Johnny Lawrence adultos" class="img-derecha">
+        </div>
+
+        <div class="info-personal">
             <div class="caja-habilidades">
-                <h2>Mi Historia</h2>
-                <p>Originalmente de Nueva Jersey, me mudé a California donde mi vida cambió gracias al Sr. Miyagi. No solo aprendí karate, sino lecciones de vida que aplico en mi negocio hoy en día.</p>
-                
-                <h3>Aficiones y Pasiones</h3>
+                <h3>Mi vida adulta</h3>
                 <ul>
-                    <li><strong>Coches Clásicos:</strong> Coleccionismo y restauración.</li>
-                    <li><strong>Familia:</strong> Pasar tiempo de calidad con mis seres queridos.</li>
-                    <li><strong>Legado:</strong> Preservar las enseñanzas de mi maestro y mantener la paz en el Valle.</li>
+                    <li>Dueño de una cadena de concesionarios de coches.</li>
+                    <li>Estoy casaso con Amanda LaRusso.</li>
+                    <li>Tengo dos hijos: Samantha y Anthony.</li>
+                </ul>
+                <h3>Principios del Miyagi-Do</h3>
+                <ul>
+                    <li>Defensa</li>
+                    <li>Contrataque</li>
+                    <li>Equilibrio</li>
+                    <li>Control emocional</li>
+                </ul>
+                <h3>El mayor valor del entrenamiento Miyagi-Do</h3>
+                <ul>
+                    <p><strong>Defensa antes que ataque</strong></p>
                 </ul>
             </div>
-            <br>
-            <a href="index.html" class="btn-volver">← Volver al Inicio</a>
         </div>
+
+    </div>
+
+    <a href="index.html" class="btn-volver">← Volver al Inicio</a>
+
     </div>
 
 </body>

@@ -162,7 +162,7 @@ nav a.active {
     flex-wrap: wrap; /* Permite que las fotos salten de línea */
     justify-content: center; /* Centra las fotos en la fila */
     gap: 20px; /* Espacio entre cada foto */
-    margin-top: 30px;
+    margin-top: 20px;
     width: 50%;
 }
 
