@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyectos - Daniel LaRusso</title>
+    <link rel="stylesheet" href="2c-template.css">
+    <style>
+        
+        .contenedor-cards {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.05); 
+            border: 2px solid #d4af37; 
+            border-radius: 12px;
+            padding: 25px;
+            width: 300px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            background: rgba(212, 175, 55, 0.1);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.2);
+        }
+        .card h2 {
+            color: #d4af37;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+        .card h3 {
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+        .tech {
+            font-size: 0.85em;
+            color: rgb(34, 1, 180);
+            margin-top: 15px;
+            border-top: 1px solid #444;
+            padding-top: 10px;
+        }
+        .btn-volver {
+            display: block;
+            width: fit-content;
+            margin: 40px auto;
+            padding: 10px 25px;
+            background-color: transparent;
+            color: #d4af37;
+            border: 1px solid #d4af37;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+        .btn-volver:hover {
+            background-color: #d4af37;
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html">Inicio</a>
+        <a href="about.html">Acerca de</a>
+        <a href="projects.html" class="active">Proyectos</a>
+    </nav>
+
+    <h2 class="titulo-principal">MIS PROYECTOS</h2>
+
+    <div class="contenedor-cards">
+        <div class="card">
+            <h2>Karate Kid I (1984)</h2>
+            <h3>Campeonato All Valley</h3>
+            <p>Superación del conflicto con Cobra Kai mediante el entrenamiento intensivo de fundamentos y equilibrio.</p>
+            <p class="tech"><strong>Hito:</strong> Victoria usando la técnica de la grulla.</p>
+            </p>
+            <p>
+                <a href="https://www.youtube.com/watch?v=r_8Rw16uscg">Trailer</a>
+            </p>
+        </div>
+
+        <div class="card">
+            <h2>Karate Kid II (1986)</h2>
+            <h3>Defensa del Honor en Okinawa</h3>
+            <p>Viaje a las raíces del Miyagi-Do. Enfrentamiento contra Chozen para proteger el legado familiar y la aldea.</p>
+            <p class="tech"><strong>Hito:</strong> Dominio de la técnica del tambor.</p>
+            </p>
+            <p>
+                <a href="https://www.youtube.com/watch?v=siRMz-PyjZI">Trailer</a>
+            </p>
+        </div>
+
+        <div class="card">
+            <h2>Karate Kid III (1989)</h2>
+            <h3>Resistencia contra Terry Silver</h3>
+            <p>Superación del miedo y manipulación psicológica. Defensa del título All Valley contra el "Bad Boy" del Karate.</p>
+            <p class="tech"><strong>Hito:</strong> Aplicación de Kata bajo presión extrema.</p>
+            </p>
+            <p>
+                <a href="https://www.youtube.com/watch?v=42xkTso8krA">Trailer</a>
+            </p>
+        </div>
+    </div>
+
+    <a href="index.html" class="btn-volver">← Volver al Inicio</a>
+
+</body>
+</html>
