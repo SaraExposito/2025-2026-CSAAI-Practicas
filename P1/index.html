@@ -6,35 +6,35 @@
     <title>CV Daniel LaRusso - Inicio</title>
     <link rel="stylesheet" href="2c-template.css">
     <style>
-        /* Contenedor flex para alinear habilidades y video */
+        
         .seccion-habilidades-video {
             display: flex;
-            align-items: stretch; /* Esto hace que ambos tengan la misma altura */
-            gap: 240px; 
+            align-items: stretch; 
+            gap: 100px; 
             margin-bottom: 20px;
         }
 
         .caja-habilidades {
             flex: 1;
-            margin-bottom: 0 !important; /* Quitamos margen inferior para cuadrar alturas */
+            margin-bottom: 0 !important; 
         }
 
         .contenedor-columna-video {
-            flex: 0 0 400px; /* Ancho fijo para el video */
+            flex: 0 0 400px; 
             display: flex;
             flex-direction: column;
         }
 
         .contenedor-video-ajustado {
-            flex: 1; /* Hace que el video crezca para igualar la altura de la caja naranja */
+            flex: 1; 
             display: flex;
         }
 
         .contenedor-video-ajustado iframe {
-            width: 100%;
-            height: 100%; /* Ocupa el 100% de la altura del contenedor */
-            border-radius: 8px; /* Bordes redondeados */
-            border: 2px solid #f39c12; /* Borde del color del tema */
+            width: 200%;
+            height: 100%; 
+            border-radius: 8px; 
+            border: 2px solid #f39c12; 
         }
 
         .textos-video {
@@ -51,18 +51,29 @@
 
         .subtitulo-video {
             font-style: italic;
-            color: #e67e22; /* Color naranja para resaltar el eslogan */
+            color: #e67e22; 
             font-weight: bold;
         }
 
-        /* Ajuste para móviles */
+        
+        .img-bonsai-hueco {
+            width: 200px; 
+            height: 200px; 
+            object-fit: cover; 
+            margin-top: 20px;
+            border-radius: 50%; 
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border: 2px solid #d4af37; 
+        }
+
+        
         @media (max-width: 768px) {
             .seccion-habilidades-video {
                 flex-direction: column;
             }
             .contenedor-columna-video {
                 flex: none;
-                height: 300px;
+                height: auto;
             }
         }
     </style>
@@ -84,16 +95,19 @@
             </div>
 
         <h3>Contacto</h3>
-        <p>Email: daniel.san@miyagi.com</p>
-        <p>Ubicación: Reseda, California</p>
-        <p>Fecha de nacimiento: 18/12/1966</p>
+        <ul class="lista-contacto">
+            <li>Email: daniel.san@miyagi.com</li>
+            <li>Ubicación: Reseda, California</li>
+            <li>Fecha de nacimiento: 18/12/1966</li>
+            <li><a href=https://es.wikipedia.org/wiki/Daniel_LaRusso>Wikipedia</a></li>
+        </ul>
       </div>
 
       <div id="c2" class="columna derecha">
           
           <div class="seccion-habilidades-video">
               <div class="caja-habilidades">
-                  <h2>Formación y Habilidades</h2>
+                  <h2>Formación, Habilidades y Curiosidades</h2>
                   <h3>Formación</h3>
                   <ul>
                       <li>Miyagi-Do Karate: Cinturón Negro.</li>
@@ -104,6 +118,12 @@
                       <li>Técnica de la Grulla.</li>
                       <li>Dar cera, pulir cera y pintar vallas.</li>
                       <li>Reflejos y defensa</li>
+                  </ul>
+                  <h3>Curiosidades</h3>
+                  <ul>
+                      <li>En la final del campeonato del All Valley, Kreese le dijo a Johnny: "A la pierna, sin piedad"</li>
+                      <li>Gané el All Valley dos veces.</li>
+                      <li>Miyagi no quería volver a enseñar karate después de la guerra, pero lo hizo por mi.</li>
                   </ul>
               </div>
 
@@ -120,6 +140,7 @@
                   <div class="textos-video">
                       <div class="titulo-video">MI CONCESIONARIO</div>
                       <div class="subtitulo-video">"Machacamos a la competencia"</div>
+                      <img src="bonsai.jpg" alt="Bonsai" class="img-bonsai-hueco">
                   </div>
               </div>
           </div>
