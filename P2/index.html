@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡BOOM! - Adivina la Clave</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="game-container">
+        <h1>¡BOOM!</h1>
+        
+        <section class="display-section">
+            <div id="secret-key" class="key-container">
+                <span class="digit" data-index="0">*</span>
+                <span class="digit" data-index="1">*</span>
+                <span class="digit" data-index="2">*</span>
+                <span class="digit" data-index="3">*</span>
+            </div>
+            <div class="stats">
+                <p>Intentos restantes: <span id="attempts">7</span></p>
+                <p>Tiempo: <span id="timer">00:00</span></p>
+            </div>
+        </section>
+
+        <section id="keyboard" class="keyboard">
+            </section>
+
+        <section class="controls">
+            <button id="btn-start">Start</button>
+            <button id="btn-stop">Stop</button>
+            <button id="btn-reset">Reset</button>
+        </section>
+
+        <div id="message" class="message-panel hidden"></div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

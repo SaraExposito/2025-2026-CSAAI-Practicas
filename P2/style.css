@@ -1,0 +1,63 @@
+:root {
+    --bg-color: #938eeab5;
+    --digit-hidden: #938eeab5;
+    --digit-found: #27ae60;
+    --text-white: #ecf0f1;
+}
+
+body {
+    font-family: sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-white);
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.key-container {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.digit {
+    width: 50px;
+    height: 70px;
+    background: var(--digit-hidden);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    border-radius: 8px;
+    border: 2px solid #bdc3c7;
+}
+
+.digit.revealed {
+    background: var(--digit-found);
+    border-color: #2ecc71;
+}
+
+.keyboard {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    max-width: 300px;
+    margin: 20px auto;
+}
+
+button {
+    padding: 10px;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: #95a5a6;
+}
+
+.hidden { display: none; }
