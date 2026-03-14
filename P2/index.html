@@ -3,37 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>¡BOOM! - Adivina la Clave</title>
+    <title>¡BOOM! - Squad Edition</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <main class="game-container">
-        <h1>¡BOOM!</h1>
-        
-        <section class="display-section">
-            <div id="secret-key" class="key-container">
-                <span class="digit" data-index="0">*</span>
-                <span class="digit" data-index="1">*</span>
-                <span class="digit" data-index="2">*</span>
-                <span class="digit" data-index="3">*</span>
-            </div>
-            <div class="stats">
-                <p>Intentos restantes: <span id="attempts">7</span></p>
-                <p>Tiempo: <span id="timer">00:00</span></p>
-            </div>
-        </section>
-
-        <section id="keyboard" class="keyboard">
+    <div class="main-wrapper">
+        <main class="game-container">
+            <header>
+                <h1 class="glitch-title">¡BOOM!</h1>
+                <p class="subtitle">Desactiva la clave antes de que sea tarde</p>
+            </header>
+            
+            <section class="display-section">
+                <div id="secret-key" class="key-container">
+                    <div class="digit-box"><span class="digit" data-index="0">*</span></div>
+                    <div class="digit-box"><span class="digit" data-index="1">*</span></div>
+                    <div class="digit-box"><span class="digit" data-index="2">*</span></div>
+                    <div class="digit-box"><span class="digit" data-index="3">*</span></div>
+                </div>
+                
+                <div class="stats-panel">
+                    <div class="stat-item">
+                        <span class="label">INTENTOS</span>
+                        <span id="attempts" class="value critical">7</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="label">CRONÓMETRO</span>
+                        <span id="timer" class="value">00:00</span>
+                    </div>
+                </div>
             </section>
 
-        <section class="controls">
-            <button id="btn-start">Start</button>
-            <button id="btn-stop">Stop</button>
-            <button id="btn-reset">Reset</button>
-        </section>
+            <div class="keyboard-wrapper">
+                <section id="keyboard" class="keyboard"></section>
+            </div>
 
-        <div id="message" class="message-panel hidden"></div>
-    </main>
+            <section class="controls">
+                <button id="btn-reset" class="btn-main">NUEVA PARTIDA</button>
+                <div class="secondary-controls">
+                    <button id="btn-start">Iniciar</button>
+                    <button id="btn-stop">Pausar</button>
+                </div>
+            </section>
+
+            <div id="message" class="message-panel hidden"></div>
+        </main>
+    </div>
 
     <script src="script.js"></script>
 </body>
