@@ -1,14 +1,14 @@
 :root {
-    --bg-dark: #06031e;
-    --accent-red: #ff4b2b;
+    --bg-dark: #7f9ae8;
+    --accent-red: #ff0000;
     --accent-green: #00f260;
-    --glass: rgba(188, 39, 39, 0.1);
+    --glass: rgba(255, 0, 204, 0.435);
     --neon-blue: #00d2ff;
 }
 
 body {
     font-family: 'Segoe UI', Roboto, sans-serif;
-    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    background: linear-gradient(135deg, #42013b, #830e77, #d393c3);
     min-height: 100vh;
     margin: 0;
     display: flex;
@@ -44,7 +44,6 @@ body {
     margin-bottom: 30px;
 }
 
-/* Contenedores de Dígitos */
 .key-container {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -74,7 +73,6 @@ body {
     text-shadow: 0 0 10px var(--accent-green);
 }
 
-/* Panel de Estadísticas */
 .stats-panel {
     display: flex;
     justify-content: space-around;
@@ -92,7 +90,6 @@ body {
 .value { font-size: 1.4rem; font-weight: bold; color: var(--neon-blue); }
 .value.critical { color: var(--accent-red); }
 
-/* Teclado */
 .keyboard {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -109,6 +106,7 @@ body {
     color: white;
     font-size: 1.2rem;
     transition: all 0.2s;
+    cursor: pointer;
 }
 
 .keyboard button:hover:not(:disabled) {
@@ -116,7 +114,6 @@ body {
     transform: translateY(-2px);
 }
 
-/* Botones de control */
 .controls {
     margin-top: 25px;
     display: flex;
@@ -130,6 +127,9 @@ body {
     padding: 15px;
     font-size: 1rem;
     letter-spacing: 2px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
 }
 
 .secondary-controls {
@@ -138,9 +138,17 @@ body {
     gap: 10px;
 }
 
-/* Mensajes */
+.secondary-controls button {
+    padding: 10px;
+    background: rgba(255,255,255,0.1);
+    color: white;
+    border: 1px solid rgba(255,255,255,0.2);
+    cursor: pointer;
+}
+
+/* Modificación para centrar contenido incluyendo la imagen */
 .message-panel {
-    position: absolute;
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -149,26 +157,23 @@ body {
     border-radius: 20px;
     border: 2px solid var(--neon-blue);
     text-align: center;
-    z-index: 10;
+    z-index: 100;
     width: 80%;
+    max-width: 350px;
     white-space: pre-line;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
-.hidden { display: none; }
+.hidden { display: none !important; }
 
-/* Estilo para los botones usados/desactivados */
 .keyboard button:disabled, 
 .keyboard button.used {
     background: rgba(255, 255, 255, 0.05) !important;
     color: #444 !important;
     border-color: #222 !important;
-    box-shadow: none !important;
     cursor: not-allowed;
-    transform: none !important;
     filter: grayscale(1);
-}
-
-/* Animación opcional para cuando se pulsa */
-.keyboard button:active {
-    transform: scale(0.95);
 }
