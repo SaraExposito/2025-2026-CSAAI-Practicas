@@ -7,6 +7,7 @@ let gameActive = false;
 
 const displayKey = document.querySelectorAll('.digit');
 const displayAttempts = document.getElementById('attempts');
+const attemptsContainer = displayAttempts.parentElement; 
 const displayTimer = document.getElementById('timer');
 const keyboard = document.getElementById('keyboard');
 const messagePanel = document.getElementById('message');
@@ -34,12 +35,16 @@ function handleGuess(num, button) {
     if (attemptsLeft <= 0 || foundCount === 4 || !gameActive) return;
     
     button.disabled = true;
-    button.classList.add('used');
-
     attemptsLeft--;
     displayAttempts.innerText = attemptsLeft;
     
-    if (attemptsLeft <= 2) displayAttempts.classList.add('critical');
+    if (attemptsLeft <= 2) {
+        displayAttempts.classList.add('critical');
+    }
+    
+    if (attemptsLeft === 1) {
+        attemptsContainer.classList.add('flash-critical');
+    }
 
     let hit = false;
     secretCode.forEach((digit, index) => {
@@ -57,11 +62,11 @@ function handleGuess(num, button) {
 function checkGameStatus() {
     if (foundCount === 4) {
         stopTimer();
-        showMessage(`¡MISIÓN CUMPLIDA! 🔓\n\nClave descifrada.\nTiempo: ${displayTimer.innerText}`, 'win');
+        showMessage("win");
     } else if (attemptsLeft === 0) {
         stopTimer();
         revealSecretCode();
-        showMessage(`¡BOOM! 💥\n\nBomba detonada.\nLa clave era: ${secretCode.join('')}`, 'lose');
+        showMessage("lose");
     }
 }
 
@@ -90,7 +95,10 @@ function resetGame() {
     
     displayTimer.innerText = "00:00";
     displayAttempts.innerText = attemptsLeft;
+    
     displayAttempts.classList.remove('critical');
+    attemptsContainer.classList.remove('flash-critical');
+    
     messagePanel.classList.add('hidden');
     statusImg.style.display = 'none';
     
@@ -103,17 +111,16 @@ function resetGame() {
     startTimer();
 }
 
-function showMessage(text, status) {
-    messageText.innerText = text;
-    
+function showMessage(status) {
     if (status === 'win') {
+        messageText.innerText = `Clave descifrada con éxito.\n🎀¡Buen trabajo!🎀`;
         statusImg.src = 'feliz.jpg';
-        statusImg.style.display = 'block';
-    } else if (status === 'lose') {
+    } else {
+        messageText.innerText = `💥La bomba ha explotado.💥\nLa clave era: ${secretCode.join('')}`;
         statusImg.src = 'triste.jpg';
-        statusImg.style.display = 'block';
     }
 
+    statusImg.style.display = 'block';
     messagePanel.classList.remove('hidden');
     messagePanel.onclick = () => messagePanel.classList.add('hidden');
 }
