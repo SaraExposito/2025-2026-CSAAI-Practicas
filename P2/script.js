@@ -51,6 +51,8 @@ function handleGuess(num, button) {
         if (digit === num) {
             displayKey[index].innerText = digit;
             displayKey[index].classList.add('revealed');
+            // MODIFICACIÓN: Añade fondo verde a la caja del número
+            displayKey[index].parentElement.classList.add('correct'); 
             foundCount++;
             hit = true;
         }
@@ -105,6 +107,8 @@ function resetGame() {
     displayKey.forEach(el => {
         el.innerText = "*";
         el.classList.remove('revealed');
+        // MODIFICACIÓN: Quita el color verde al reiniciar la partida
+        el.parentElement.classList.remove('correct'); 
     });
     
     createKeyboard();
@@ -129,6 +133,8 @@ function revealSecretCode() {
     secretCode.forEach((digit, index) => {
         displayKey[index].innerText = digit;
         displayKey[index].classList.add('revealed');
+        // MODIFICACIÓN: También se ponen verdes al revelar la clave al perder
+        displayKey[index].parentElement.classList.add('correct'); 
     });
 }
 

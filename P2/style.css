@@ -1,14 +1,15 @@
 :root {
     --bg-pink: #e288b5;
-    --minnie-red: #220496;
+    --minnie-red: #ff0000; 
     --accent-yellow: #66aae6;
+    --minnie-blue: #220496;
+    --hover-gray: #bcb0ed; /* Nuevo color gris para el hover */
     --glass: rgba(0, 0, 0, 0.7);
     --font-disney: 'Fredoka', sans-serif;
 }
 
 body {
     font-family: var(--font-disney);
-    /* Fondo de lunares estilo Minnie */
     background-color: var(--bg-pink);
     background-image: radial-gradient(white 15%, transparent 16%),
                       radial-gradient(white 15%, transparent 16%);
@@ -38,7 +39,7 @@ body {
     text-align: center;
     margin: 0;
     color: var(--accent-yellow);
-    text-shadow: 4px 4px 0px var(--minnie-red);
+    text-shadow: 4px 4px 0px var(--minnie-blue);
     text-transform: uppercase;
 }
 
@@ -63,7 +64,8 @@ body {
     align-items: center;
     justify-content: center;
     border-radius: 15px;
-    border: 3px solid var(--minnie-red);
+    border: 3px solid var(--minnie-blue);
+    transition: all 0.3s ease;
 }
 
 .digit {
@@ -73,7 +75,7 @@ body {
 }
 
 .digit.revealed {
-    color: var(--minnie-red);
+    color: var(--minnie-blue);
 }
 
 .stats-panel {
@@ -102,7 +104,7 @@ body {
     background: white;
     border: none;
     border-radius: 15px;
-    color: var(--minnie-red);
+    color: var(--minnie-blue);
     font-size: 1.5rem;
     font-weight: bold;
     cursor: pointer;
@@ -120,7 +122,20 @@ body {
     box-shadow: 0 1px 0px #ccc;
 }
 
-.btn-main {
+/* --- SECCIÓN DE BOTONES DE CONTROL --- */
+.controls {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.secondary-controls {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-main, .secondary-controls button {
     font-family: var(--font-disney);
     background: var(--accent-yellow);
     color: #333;
@@ -130,20 +145,31 @@ body {
     border: 3px solid white;
     border-radius: 50px;
     cursor: pointer;
-    box-shadow: 0 5px 0px#8776cb;
+    box-shadow: 0 5px 0px #8776cb;
+    transition: all 0.2s ease;
+    width: 100%;
+    text-transform: uppercase;
 }
 
 .secondary-controls button {
-    font-family: var(--font-disney);
+    font-size: 1rem;
     padding: 10px;
-    background: rgba(255,255,255,0.2);
-    color: white;
-    border: 2px solid white;
-    border-radius: 10px;
-    cursor: pointer;
-    font-weight: bold;
+    flex: 1;
 }
 
+/* MODIFICACIÓN: Color gris al pasar el ratón */
+.btn-main:hover, .secondary-controls button:hover {
+    background: var(--hover-gray);
+    color: white;
+    box-shadow: 0 5px 0px #66aae6;; /* Sombra más oscura para el gris */
+}
+
+.btn-main:active, .secondary-controls button:active {
+    transform: translateY(4px);
+    box-shadow: 0 1px 0px #8776cb;
+}
+
+/* --- RESTO DE ESTILOS --- */
 .message-panel {
     position: fixed;
     top: 50%;
@@ -153,7 +179,7 @@ body {
     color: #333;
     padding: 30px;
     border-radius: 25px;
-    border: 5px solid var(--minnie-red);
+    border: 5px solid var(--minnie-blue);
     text-align: center;
     z-index: 100;
     width: 80%;
@@ -175,10 +201,20 @@ body {
 
 @keyframes blink-red-bg {
     0% { background: rgba(255,255,255,0.1); }
-    50% { background: var(--minnie-red); }
+    50% { background: #ff0000; } 
     100% { background: rgba(255,255,255,0.1); }
 }
 
 .flash-critical {
     animation: blink-red-bg 0.6s infinite;
+}
+
+.digit-box.correct {
+    background-color: #2ecc71 !important;
+    border-color: #27ae60 !important;
+    transform: scale(1.05);
+}
+
+.digit-box.correct .digit {
+    color: white !important;
 }
