@@ -3,7 +3,7 @@
     --minnie-red: #ff0000; 
     --accent-yellow: #66aae6;
     --minnie-blue: #220496;
-    --hover-gray: #bcb0ed; /* Nuevo color gris para el hover */
+    --hover-gray: #bcb0ed;
     --glass: rgba(0, 0, 0, 0.7);
     --font-disney: 'Fredoka', sans-serif;
 }
@@ -122,7 +122,6 @@ body {
     box-shadow: 0 1px 0px #ccc;
 }
 
-/* --- SECCIÓN DE BOTONES DE CONTROL --- */
 .controls {
     display: flex;
     flex-direction: column;
@@ -157,11 +156,11 @@ body {
     flex: 1;
 }
 
-/* MODIFICACIÓN: Color gris al pasar el ratón */
+
 .btn-main:hover, .secondary-controls button:hover {
     background: var(--hover-gray);
     color: white;
-    box-shadow: 0 5px 0px #66aae6;; /* Sombra más oscura para el gris */
+    box-shadow: 0 5px 0px #66aae6;; 
 }
 
 .btn-main:active, .secondary-controls button:active {
@@ -169,7 +168,7 @@ body {
     box-shadow: 0 1px 0px #8776cb;
 }
 
-/* --- RESTO DE ESTILOS --- */
+
 .message-panel {
     position: fixed;
     top: 50%;

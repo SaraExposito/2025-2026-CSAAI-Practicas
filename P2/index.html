@@ -12,10 +12,10 @@
         <main class="game-container">
             <header>
                 <h1 class="glitch-title">¡BOOM!</h1>
-                <p class="subtitle">¡Ayuda a Minnie a desactivar la clave!</p>
+                <p class="subtitle">🩷¡Ayuda a Minnie a desactivar la clave!🩷 Pulsa Start o un número para comenzar.</p>
             </header>
             
-            <section class="display-section">
+            <div class="display-section">
                 <div id="secret-key" class="key-container">
                     <div class="digit-box"><span class="digit" data-index="0">*</span></div>
                     <div class="digit-box"><span class="digit" data-index="1">*</span></div>
@@ -33,23 +33,26 @@
                         <span id="timer" class="value">00:00</span>
                     </div>
                 </div>
-            </section>
-
-            <div class="keyboard-wrapper">
-                <section id="keyboard" class="keyboard"></section>
             </div>
 
-            <section class="controls">
+            <div class="keyboard-wrapper">
+                <div id="keyboard" class="keyboard"></div>
+            </div>
+
+            <div class="controls">
                 <button id="btn-reset" class="btn-main">RESET</button>
                 
                 <div class="secondary-controls">
                     <button id="btn-start" class="btn-main">START</button>
                     <button id="btn-stop" class="btn-main">STOP</button>
                 </div>
-            </section>
+            </div>
 
             <div id="message" class="message-panel hidden">
-                <img id="status-image" src="" alt="Estado" style="width: 140px; margin-bottom: 15px; display: none; border: 4px solid white; border-radius: 15px;">
+                <img id="status-image" 
+                    src="A" 
+                    alt="Estado" 
+                    style="width: 140px; margin-bottom: 15px; display: none; border: 4px solid white; border-radius: 15px;">
                 <div id="message-text"></div>
             </div>
         </main>

@@ -1,3 +1,5 @@
+/* jshint esversion: 6 */
+
 let secretCode = [];
 let attemptsLeft = 7;
 let foundCount = 0;
@@ -14,25 +16,36 @@ const messagePanel = document.getElementById('message');
 const messageText = document.getElementById('message-text');
 const statusImg = document.getElementById('status-image');
 
+function makeGuessHandler(num) {
+    return function(event) {
+        handleGuess(num, event.target);
+    };
+}
+
 function createKeyboard() {
     keyboard.innerHTML = '';
     for (let i = 0; i <= 9; i++) {
         const btn = document.createElement('button');
         btn.innerText = i;
         btn.classList.add('key-btn');
-        btn.addEventListener('click', () => handleGuess(i, btn));
+        
+        btn.addEventListener('click', makeGuessHandler(i));
         keyboard.appendChild(btn);
     }
 }
 
 function generateCode() {
-    const nums = Array.from({length: 10}, (_, i) => i);
+    const nums = Array.from({length: 10}, (unused, i) => i);
     nums.sort(() => Math.random() - 0.5);
     return nums.slice(0, 4);
 }
 
 function handleGuess(num, button) {
-    if (attemptsLeft <= 0 || foundCount === 4 || !gameActive) return;
+    if (attemptsLeft <= 0 || foundCount === 4) return;
+    
+    if (!gameActive) {
+        startTimer();
+    }
     
     button.disabled = true;
     attemptsLeft--;
@@ -51,7 +64,6 @@ function handleGuess(num, button) {
         if (digit === num) {
             displayKey[index].innerText = digit;
             displayKey[index].classList.add('revealed');
-            // MODIFICACIÓN: Añade fondo verde a la caja del número
             displayKey[index].parentElement.classList.add('correct'); 
             foundCount++;
             hit = true;
@@ -73,7 +85,7 @@ function checkGameStatus() {
 }
 
 function startTimer() {
-    if (gameActive) return;
+    if (gameActive) return; 
     gameActive = true;
     timerInterval = setInterval(() => {
         seconds++;
@@ -89,11 +101,12 @@ function stopTimer() {
 }
 
 function resetGame() {
-    stopTimer();
+    stopTimer(); 
     seconds = 0;
     attemptsLeft = 7;
     foundCount = 0;
     secretCode = generateCode();
+    gameActive = false; 
     
     displayTimer.innerText = "00:00";
     displayAttempts.innerText = attemptsLeft;
@@ -107,20 +120,33 @@ function resetGame() {
     displayKey.forEach(el => {
         el.innerText = "*";
         el.classList.remove('revealed');
-        // MODIFICACIÓN: Quita el color verde al reiniciar la partida
         el.parentElement.classList.remove('correct'); 
     });
     
     createKeyboard();
-    startTimer();
+}
+
+function initStaticBoard() {
+    stopTimer();
+    createKeyboard();
+    secretCode = generateCode();
+    displayTimer.innerText = "00:00";
+    displayAttempts.innerText = "7";
+    gameActive = false;
 }
 
 function showMessage(status) {
     if (status === 'win') {
-        messageText.innerText = `Clave descifrada con éxito.\n🎀¡Buen trabajo!🎀`;
+        const attemptsUsed = 7 - attemptsLeft;
+        const attemptsRemaining = attemptsLeft;
+        const timeSpent = displayTimer.innerText;
+
+        messageText.innerText = `🎀 ¡Buen trabajo! 🎀\n` +
+            `Tiempo: ${timeSpent} · Intentos usados: ${attemptsUsed} · Intentos restantes: ${attemptsRemaining}`;
+        
         statusImg.src = 'feliz.jpg';
     } else {
-        messageText.innerText = `💥La bomba ha explotado.💥\nLa clave era: ${secretCode.join('')}`;
+        messageText.innerText = `💥 La bomba ha explotado. 💥\nLa clave era: ${secretCode.join('')}`;
         statusImg.src = 'triste.jpg';
     }
 
@@ -133,7 +159,6 @@ function revealSecretCode() {
     secretCode.forEach((digit, index) => {
         displayKey[index].innerText = digit;
         displayKey[index].classList.add('revealed');
-        // MODIFICACIÓN: También se ponen verdes al revelar la clave al perder
         displayKey[index].parentElement.classList.add('correct'); 
     });
 }
@@ -142,4 +167,4 @@ document.getElementById('btn-start').addEventListener('click', startTimer);
 document.getElementById('btn-stop').addEventListener('click', stopTimer);
 document.getElementById('btn-reset').addEventListener('click', resetGame);
 
-resetGame();
+initStaticBoard();
