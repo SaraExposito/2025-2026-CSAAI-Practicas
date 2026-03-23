@@ -89,7 +89,9 @@ body {
 
 .label { font-size: 0.75rem; color: var(--accent-yellow); display: block; font-weight: bold; }
 .value { font-size: 1.5rem; font-weight: bold; color: white; }
-.value.critical { color: var(--accent-yellow); }
+
+/* Modificado para que siempre sea blanco */
+.value.critical { color: white; }
 
 .keyboard {
     display: grid;
@@ -156,7 +158,6 @@ body {
     flex: 1;
 }
 
-
 .btn-main:hover, .secondary-controls button:hover {
     background: var(--hover-gray);
     color: white;
@@ -167,7 +168,6 @@ body {
     transform: translateY(4px);
     box-shadow: 0 1px 0px #8776cb;
 }
-
 
 .message-panel {
     position: fixed;
