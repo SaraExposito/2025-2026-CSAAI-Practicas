@@ -89,8 +89,6 @@ body {
 
 .label { font-size: 0.75rem; color: var(--accent-yellow); display: block; font-weight: bold; }
 .value { font-size: 1.5rem; font-weight: bold; color: white; }
-
-/* Modificado para que siempre sea blanco */
 .value.critical { color: white; }
 
 .keyboard {
