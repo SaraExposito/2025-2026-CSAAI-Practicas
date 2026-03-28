@@ -1,0 +1,42 @@
+body {
+    margin: 0;
+    background: #050505;
+    color: #00ffcc;
+    font-family: 'Courier New', Courier, monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+#game-container { position: relative; }
+
+#hud {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background: rgba(0, 255, 204, 0.1);
+    border: 1px solid #00ffcc;
+}
+
+#energy-bar {
+    width: 100px;
+    height: 10px;
+    background: #333;
+    display: inline-block;
+    border: 1px solid #00ffcc;
+}
+
+#energy-fill {
+    width: 100%;
+    height: 100%;
+    background: #00ffcc;
+    transition: width 0.1s;
+}
+
+canvas {
+    background: url('https://i.imgur.com/8Q8q3mD.png'); /* Fondo de estrellas */
+    border: 2px solid #00ffcc;
+    display: block;
+}
