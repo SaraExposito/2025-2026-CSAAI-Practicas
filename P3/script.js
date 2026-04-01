@@ -1,149 +1,190 @@
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
+
+// Configuración de pantalla
 canvas.width = 800;
 canvas.height = 600;
 
-// --- Configuración y Estado ---
+// --- 1. CARGA DE ACTIVOS ---
+const imgNave = new Image();
+imgNave.src = 'astronave.png';
+
+const imgAlien = new Image();
+imgAlien.src = 'extraterrestre.png';
+
+// Sonidos (Asegúrate de tener estos archivos o usa rutas válidas)
+const sndShoot = new Audio('https://actions.google.com/sounds/v1/science_fiction/alien_beam.ogg');
+const sndExplosion = new Audio('https://actions.google.com/sounds/v1/science_fiction/low_f_pulse.ogg');
+
+// --- 2. VARIABLES DE ESTADO ---
 let score = 0;
 let lives = 3;
-let energy = 100; // Carga máxima
-const energyCost = 20; // Coste por disparo
-const energyRegen = 0.5; // Recuperación por frame (~30/seg)
+let gameOver = false;
+let victory = false;
 
-let gameRunning = true;
-
-// Controles
-const keys = {};
-window.addEventListener("keydown", e => keys[e.code] = true);
-window.addEventListener("keyup", e => keys[e.code] = false);
-
-// --- Entidades ---
+// Caza Estelar
 const player = {
     x: canvas.width / 2 - 25,
-    y: canvas.height - 60,
-    w: 50,
-    h: 30,
-    speed: 7
+    y: canvas.height - 70,
+    w: 50, h: 50,
+    speed: 7,
+    bullets: [],
+    energy: 5,
+    maxEnergy: 5,
+    lastRegen: Date.now()
 };
 
-let bullets = [];
-let enemyBullets = [];
-let aliens = [];
-let explosions = [];
+// Flota Alienígena (3 filas de 8)
+const aliens = {
+    rows: 3, cols: 8,
+    w: 45, h: 45,
+    list: [],
+    dir: 1,
+    baseSpeed: 1,
+    bullets: [],
+    lastShot: 0
+};
 
-// Crear flota inicial (3 filas x 8 alienígenas)
-function createAliens() {
-    for (let row = 0; row < 3; row++) {
-        for (let col = 0; col < 8; col++) {
-            aliens.push({
-                x: 100 + col * 70,
-                y: 50 + row * 50,
-                w: 40,
-                h: 30,
-                alive: true
-            });
-        }
+// Inicializar formación
+for (let r = 0; r < aliens.rows; r++) {
+    for (let c = 0; c < aliens.cols; c++) {
+        aliens.list.push({
+            x: c * (aliens.w + 25) + 100,
+            y: r * (aliens.h + 20) + 80,
+            alive: true
+        });
     }
 }
-createAliens();
 
-let alienSpeed = 1;
-let alienDirection = 1;
+// --- 3. CONTROLES ---
+const keys = {};
+window.onkeydown = (e) => {
+    keys[e.code] = true;
+    if (e.code === "Space") shoot();
+};
+window.onkeyup = (e) => keys[e.code] = false;
 
-// --- Funciones de Lógica ---
+function shoot() {
+    if (player.energy >= 1 && !gameOver && !victory) {
+        player.bullets.push({ x: player.x + player.w/2 - 2, y: player.y, v: 8 });
+        player.energy--;
+        sndShoot.currentTime = 0;
+        sndShoot.play();
+    }
+}
 
+// --- 4. LÓGICA DE ACTUALIZACIÓN ---
 function update() {
-    if (!gameRunning) return;
+    if (gameOver || victory) return;
 
     // Movimiento Jugador
     if (keys["ArrowLeft"] && player.x > 0) player.x -= player.speed;
     if (keys["ArrowRight"] && player.x < canvas.width - player.w) player.x += player.speed;
 
-    // Disparo (Barra espaciadora + Gestión de Energía)
-    if (keys["Space"] && energy >= energyCost) {
-        bullets.push({ x: player.x + player.w / 2 - 2, y: player.y, w: 4, h: 10 });
-        energy -= energyCost;
-        keys["Space"] = false; // Evita ráfaga infinita si se deja pulsado
-        // Aquí dispararías el sonido de antimateria
+    // Recarga Energía (0.5s)
+    if (Date.now() - player.lastRegen > 500 && player.energy < player.maxEnergy) {
+        player.energy++;
+        player.lastRegen = Date.now();
     }
-    
-    // Recarga de Energía
-    if (energy < 100) energy = Math.min(100, energy + energyRegen);
-    document.getElementById("energy-fill").style.width = energy + "%";
 
-    // Movimiento Alienígenas + Aumento de Velocidad
+    // Aceleración y Movimiento Alien
+    let aliveCount = aliens.list.filter(a => a.alive).length;
+    if (aliveCount === 0) { victory = true; return; }
+
+    let speedFactor = 1 + ( (24 - aliveCount) * 0.15 );
     let touchEdge = false;
-    const currentSpeed = alienSpeed + (24 - aliens.length) * 0.15; // Más rápido cuantos menos queden
 
-    aliens.forEach(a => {
-        a.x += currentSpeed * alienDirection;
-        if (a.x <= 0 || a.x >= canvas.width - a.w) touchEdge = true;
+    aliens.list.forEach(a => {
+        if (!a.alive) return;
+        a.x += (aliens.baseSpeed * speedFactor) * aliens.dir;
+        if (a.x + aliens.w > canvas.width || a.x < 0) touchEdge = true;
+        if (a.y + aliens.h >= player.y) gameOver = true; // Derrota por avance
     });
 
     if (touchEdge) {
-        alienDirection *= -1;
-        aliens.forEach(a => a.y += 10);
+        aliens.dir *= -1;
+        aliens.list.forEach(a => a.y += 15);
     }
 
-    // Disparo Enemigo Aleatorio (~1 por segundo)
-    if (Math.random() < 0.02 && aliens.length > 0) {
-        const shooter = aliens[Math.floor(Math.random() * aliens.length)];
-        enemyBullets.push({ x: shooter.x + shooter.w/2, y: shooter.y, w: 4, h: 10 });
+    // Disparos enemigos (Aleatorios)
+    if (Date.now() - aliens.lastShot > 1000) {
+        let shooters = aliens.list.filter(a => a.alive);
+        let s = shooters[Math.floor(Math.random() * shooters.length)];
+        if (s) aliens.bullets.push({ x: s.x + aliens.w/2, y: s.y + aliens.h, v: 5 });
+        aliens.lastShot = Date.now();
     }
 
-    // Colisiones Proyectiles -> Alien
-    bullets.forEach((b, bi) => {
-        b.y -= 10;
-        aliens.forEach((a, ai) => {
-            if (b.x < a.x + a.w && b.x + b.w > a.x && b.y < a.y + a.h && b.y + b.h > a.y) {
-                aliens.splice(ai, 1);
-                bullets.splice(bi, 1);
-                score += 10;
-                document.getElementById("score").innerText = score;
-                // Activar explosión por 15 frames (aquí simplificado)
-            }
-        });
-    });
-
-    // Colisiones Enemigo -> Jugador
-    enemyBullets.forEach((eb, ebi) => {
-        eb.y += 5;
-        if (eb.x < player.x + player.w && eb.x + eb.w > player.x && eb.y < player.y + player.h && eb.y + eb.h > player.y) {
-            enemyBullets.splice(ebi, 1);
-            lives--;
-            document.getElementById("lives").innerText = lives;
-            if (lives <= 0) endGame(false);
-        }
-    });
-
-    // Condición de Victoria
-    if (aliens.length === 0) endGame(true);
+    handleCollisions();
 }
 
+function handleCollisions() {
+    // Balas jugador -> Aliens
+    player.bullets.forEach((b, bi) => {
+        b.y -= b.v;
+        aliens.list.forEach(a => {
+            if (a.alive && b.x > a.x && b.x < a.x + aliens.w && b.y > a.y && b.y < a.y + aliens.h) {
+                a.alive = false;
+                player.bullets.splice(bi, 1);
+                score += 10;
+                sndExplosion.currentTime = 0;
+                sndExplosion.play();
+            }
+        });
+        if (b.y < 0) player.bullets.splice(bi, 1);
+    });
+
+    // Balas enemigos -> Jugador
+    aliens.bullets.forEach((b, bi) => {
+        b.y += b.v;
+        if (b.x > player.x && b.x < player.x + player.w && b.y > player.y && b.y < player.y + player.h) {
+            aliens.bullets.splice(bi, 1);
+            lives--;
+            if (lives <= 0) gameOver = true;
+        }
+        if (b.y > canvas.height) aliens.bullets.splice(bi, 1);
+    });
+}
+
+// --- 5. RENDERIZADO ---
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Dibujar Jugador
-    ctx.fillStyle = "#00ffcc";
-    ctx.fillRect(player.x, player.y, player.w, player.h);
+    // Dibujar Astronave
+    ctx.drawImage(imgNave, player.x, player.y, player.w, player.h);
 
-    // Dibujar Balas
-    ctx.fillStyle = "yellow";
-    bullets.forEach(b => ctx.fillRect(b.x, b.y, b.w, b.h));
+    // Dibujar Extraterrestres
+    aliens.list.forEach(a => {
+        if (a.alive) ctx.drawImage(imgAlien, a.x, a.y, aliens.w, aliens.h);
+    });
 
-    // Dibujar Balas Enemigas
-    ctx.fillStyle = "red";
-    enemyBullets.forEach(eb => ctx.fillRect(eb.x, eb.y, eb.w, eb.h));
+    // Proyectiles
+    ctx.fillStyle = "white"; // Tus disparos
+    player.bullets.forEach(b => ctx.fillRect(b.x, b.y, 4, 12));
+    
+    ctx.fillStyle = "red"; // Disparos enemigos
+    aliens.bullets.forEach(b => ctx.fillRect(b.x, b.y, 4, 12));
 
-    // Dibujar Aliens
-    ctx.fillStyle = "#ff00ff";
-    aliens.forEach(a => ctx.fillRect(a.x, a.y, a.w, a.h));
-}
+    // HUD (Estilo Prof.)
+    ctx.fillStyle = "white";
+    ctx.font = "20px Arial";
+    ctx.fillText(`Puntuación: ${score}`, 20, 40);
+    ctx.fillText(`Vidas: ${lives}`, canvas.width - 120, 40);
+    
+    // Energía
+    ctx.fillStyle = player.energy < 2 ? "red" : "#00FFCC";
+    ctx.fillRect(20, 55, player.energy * 15, 8);
 
-function endGame(win) {
-    gameRunning = false;
-    alert(win ? "¡VICTORIA EN CANVA CENTAURI!" : "GAME OVER: La humanidad ha caído.");
-    location.reload();
+    if (victory || gameOver) {
+        ctx.textAlign = "center";
+        ctx.font = "bold 60px Arial";
+        if (victory) {
+            ctx.fillStyle = "#00FF00";
+            ctx.fillText("VICTORY!", canvas.width/2, canvas.height/2);
+        } else {
+            ctx.fillStyle = "red";
+            ctx.fillText("GAME OVER", canvas.width/2, canvas.height/2);
+        }
+    }
 }
 
 function loop() {
@@ -152,4 +193,7 @@ function loop() {
     requestAnimationFrame(loop);
 }
 
-loop();
+// Arrancar cuando las imágenes carguen
+imgNave.onload = () => {
+    loop();
+};
