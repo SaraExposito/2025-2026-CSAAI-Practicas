@@ -11,16 +11,6 @@ body {
     overflow: hidden;
 }
 
-#ui-layer {
-    position: absolute;
-    top: 10px;
-    width: 95%;
-    display: flex;
-    justify-content: space-between;
-    pointer-events: none;
-    z-index: 10;
-}
-
 canvas {
     border: 2px solid #fff700;
     box-shadow: 0 0 15px #ccff0055;
@@ -28,5 +18,3 @@ canvas {
     max-width: 100vw;
     max-height: 80vh;
 }
-
-#stats { font-size: 1.2rem; text-shadow: 0 0 5px #00ff33; }
