@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beat The Word</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="app-wrapper">
+        <header class="main-header">
+            <div class="title-group">
+                <h1>BEAT THE WORD</h1>
+                <p>Sigue la secuencia al ritmo del Beat</p>
+            </div>
+            <div class="top-stats">
+                <div class="stat-box"><span>Nivel</span><strong id="label-level">1/5</strong></div>
+                <div class="stat-box"><span>Tiempo</span><strong id="label-time">0.0s</strong></div>
+                <div class="stat-box"><span>Estado</span><strong id="label-status">En espera</strong></div>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <aside class="sidebar">
+                <div class="info-card">
+                    <h3>Cómo funciona</h3>
+                    <p>El juego recorre siempre las 8 imágenes de izquierda a derecha y de arriba abajo. En cada paso solo se ilumina una. Tienes que decir la palabra correcta antes del siguiente salto.</p>
+                </div>
+
+                <div class="config-card">
+                    <h3>Configuración</h3>
+                    <label>Secuencia</label>
+                    <select id="select-pack">
+                        <option value="casa-cama">Casa / Cama</option>
+                        <option value="sol-sal">Sol / Sal</option>
+                    </select>
+
+                    <label>Nivel inicial</label>
+                    <select id="select-level">
+                        <option value="1">Nivel 1</option>
+                        <option value="2">Nivel 2</option>
+                        <option value="3">Nivel 3</option>
+                        <option value="4">Nivel 4</option>
+                        <option value="5">Nivel 5</option>
+                    </select>
+
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="show-titles" checked> <label for="show-titles">Mostrar título en las tarjetas</label>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button id="btn-start" class="btn-primary">Empezar partida</button>
+                    <button id="btn-stop" class="btn-secondary" disabled>Detener</button>
+                </div>
+            </aside>
+
+            <main class="game-area">
+                <div class="game-top-bar">
+                    <button id="btn-music" class="music-toggle">🎵 Música: ON</button>
+                </div>
+
+                <div id="word-screen">
+                    <h2 id="current-round-display">1/5</h2>
+                    <p id="current-word">Pulsa "Empezar"</p>
+                </div>
+
+                <div class="grid-container" id="grid">
+                    </div>
+            </main>
+        </div>
+    </div>
+
+    <audio id="bg-music" loop src="music.mp3"></audio>
+    <script src="script.js"></script>
+</body>
+</html>

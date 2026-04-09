@@ -1,0 +1,10 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    /* Cambiamos el color sólido por la imagen de fondo */
+    background-image: url('fondo.jpg'); 
+    background-size: cover;       /* Asegura que la imagen cubra toda la pantalla */
+    background-position: center;  /* Centra la imagen */
+    background-attachment: fixed; /* Mantiene el fondo quieto al hacer scroll */
+    color: var(--text-dark);
+}
