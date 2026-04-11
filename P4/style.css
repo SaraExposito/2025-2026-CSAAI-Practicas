@@ -1,10 +1,10 @@
 :root {
-    --bg-main: #0f172a;
+    --bg-main: #4a4968;
     --card-bg: #1e293b;
-    --accent-purple: #8b5cf6;
+    --accent-purple: #5a34b3;
     --accent-cyan: #06b6d4;
     --text-light: #f8fafc;
-    --text-dim: #94a3b8;
+    --text-dim: #04295c;
     --white: #ffffff;
     --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
 }
@@ -67,7 +67,7 @@ body {
 .sidebar { width: 320px; display: flex; flex-direction: column; gap: 20px; }
 
 .glass-card {
-    background: rgba(30, 41, 59, 0.7);
+    background: rgba(184, 168, 216, 0.7);
     backdrop-filter: blur(10px);
     padding: 20px;
     border-radius: 24px;
@@ -83,7 +83,7 @@ body {
     width: 100%; 
     padding: 12px; 
     border-radius: 12px; 
-    background: #0f172a; 
+    background: #4f5977; 
     color: white; 
     border: 1px solid #334155;
     outline: none;
@@ -132,7 +132,7 @@ body {
 /* Game Area */
 .game-area {
     flex-grow: 1;
-    background: #1e293b;
+    background: rgba(184, 168, 216, 0.7);
     border-radius: 32px;
     padding: 30px;
     box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
@@ -165,7 +165,7 @@ body {
 }
 
 .grid-item {
-    background: #334155;
+    background: #5d789e;
     border-radius: 20px;
     padding: 20px;
     text-align: center;
@@ -196,7 +196,7 @@ body {
 }
 
 /* Diferenciación de cartas */
-.grid-item.white-card { background: #475569; }
+.grid-item.white-card { background: #a9bdd9; }
 
 /* ESTADO ACTIVO */
 .grid-item.active {
