@@ -19,11 +19,11 @@ const btnStop = document.getElementById('btn-stop');
 const audio = document.getElementById('bg-music');
 
 const levels = [
-    { pattern: [1,1,1,1,0,0,0,0], speed: 900 },
-    { pattern: [0,1,0,1,0,1,0,1], speed: 750 },
-    { pattern: [1,0,1,0,1,0,1,0], speed: 600 },
-    { pattern: [0,0,1,1,0,0,1,1], speed: 500 },
-    { pattern: [1,0,0,1,0,1,1,0], speed: 400 }
+    { pattern: [1,1,1,1,0,0,0,0], speed: 1000 },
+    { pattern: [0,1,0,1,0,1,0,1], speed: 900 },
+    { pattern: [1,0,1,0,1,0,1,0], speed: 800 },
+    { pattern: [0,0,1,1,0,0,1,1], speed: 700 },
+    { pattern: [1,0,0,1,0,1,1,0], speed: 600 }
 ];
 
 function updateGrid() {
