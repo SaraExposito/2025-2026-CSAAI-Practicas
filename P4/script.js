@@ -22,8 +22,8 @@ const levels = [
     { pattern: [1,1,1,1,0,0,0,0], speed: 900 },
     { pattern: [0,1,0,1,0,1,0,1], speed: 750 },
     { pattern: [1,0,1,0,1,0,1,0], speed: 600 },
-    { pattern: [0,0,1,1,0,0,1,1], speed: 450 },
-    { pattern: [1,0,0,1,0,1,1,0], speed: 300 }
+    { pattern: [0,0,1,1,0,0,1,1], speed: 500 },
+    { pattern: [1,0,0,1,0,1,1,0], speed: 400 }
 ];
 
 function updateGrid() {
