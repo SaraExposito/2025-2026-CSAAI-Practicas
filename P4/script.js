@@ -35,7 +35,6 @@ function updateGrid() {
         const word = packNames[typeIdx];
         const item = document.createElement('div');
         
-        // Definimos qué palabras activan el fondo claro (la primera de cada pareja)
         const isFirstInPair = (word === packNames[0]);
         item.className = `grid-item ${isFirstInPair ? 'white-card' : ''}`;
         
@@ -54,6 +53,13 @@ function startGame() {
     
     toggleControls(true);
     labelStatus.innerText = "Jugando";
+
+    // MODIFICACIÓN: La música arranca automáticamente al empezar
+    if (audio.paused) {
+        audio.loop = true;
+        audio.play();
+        document.getElementById('btn-music').innerText = "🎵 Música: ON";
+    }
     
     startTimer();
     runRound();
@@ -89,7 +95,6 @@ function nextStep() {
     }
 }
 
-// MODIFICADO: Ya no detiene la música al parar el juego
 function stopGame() {
     clearInterval(gameInterval);
     clearInterval(timerInterval);
@@ -101,8 +106,7 @@ function stopGame() {
     wordDisplay.innerText = "PULSA EMPEZAR";
     labelStatus.innerText = "En espera";
     
-    // Se eliminan las líneas de audio.pause() para que la música sea independiente
-
+    
     toggleControls(false);
 }
 
@@ -132,14 +136,14 @@ function toggleControls(isPlaying) {
 btnStart.addEventListener('click', startGame);
 btnStop.addEventListener('click', stopGame); 
 
-// MODIFICADO: Control estricto de Bucle y Pausa
+// El botón manual sigue funcionando para silenciar si se desea
 document.getElementById('btn-music').onclick = () => {
     if (audio.paused) {
-        audio.loop = true; // Asegura que suene en bucle
+        audio.loop = true;
         audio.play();
         document.getElementById('btn-music').innerText = "🎵 Música: ON";
     } else {
-        audio.pause(); // Detiene la música
+        audio.pause();
         document.getElementById('btn-music').innerText = "🎵 Música: OFF";
     }
 };
