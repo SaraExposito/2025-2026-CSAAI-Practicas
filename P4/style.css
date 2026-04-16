@@ -1,11 +1,11 @@
 :root {
-    /* CAMBIO A TONOS AMARILLOS Y ROSAS */
-    --bg-main: #f4ecb0; /* Amarillo suave */
-    --card-bg: #fdf2f8; /* Rosa casi blanco para tarjetas */
-    --accent-purple: #db2777; /* Rosa fuerte (sustituye al púrpura) */
-    --accent-cyan: #e3a044; /* Amarillo vibrante (sustituye al cyan/ocre) */
-    --text-light: #d825b1; /* Granate/Rosa oscuro para contraste */
-    --text-dim: #9d174d; /* Rosa medio */
+    
+    --bg-main: #f4ecb0; 
+    --card-bg: #fdf2f8; 
+    --accent-purple: #db2777;
+    --accent-cyan: #e3a044; 
+    --text-light: #d825b1; 
+    --text-dim: #9d174d; 
     --white: #ffffff;
     --shadow-xl: 0 20px 25px -5px rgba(219, 39, 119, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
 }
@@ -27,7 +27,7 @@ body {
     padding: 20px;
 }
 
-/* Header & Stats */
+
 .main-header {
     display: flex;
     justify-content: space-between;
@@ -61,14 +61,14 @@ body {
 .stat-box .label { display: block; font-size: 0.7rem; text-transform: uppercase; color: var(--accent-purple); font-weight: 700; margin-bottom: 4px; }
 .stat-box strong { font-size: 1.2rem; font-weight: 800; color: var(--accent-purple); }
 
-/* Layout Main */
+
 .main-content { display: flex; gap: 30px; }
 
-/* Sidebar */
+
 .sidebar { width: 320px; display: flex; flex-direction: column; gap: 20px; }
 
 .glass-card {
-    background: rgba(255, 255, 255, 0.5); /* Fondo claro semi-transparente */
+    background: rgba(255, 255, 255, 0.5);
     backdrop-filter: blur(10px);
     padding: 20px;
     border-radius: 24px;
@@ -92,7 +92,7 @@ body {
 
 .checkbox-group { display: flex; align-items: center; gap: 10px; font-size: 0.85rem; margin-top: 15px; color: var(--accent-purple); }
 
-/* Buttons */
+
 .btn-primary { 
     background: var(--accent-purple); 
     color: white; 
@@ -130,7 +130,7 @@ body {
     border-color: #ff5500;
 }
 
-/* Game Area */
+
 .game-area {
     flex-grow: 1;
     background: rgba(255, 255, 255, 0.4);
@@ -171,7 +171,7 @@ body {
 }
 #current-word { margin: 0; font-size: 1.5rem; font-weight: 900; text-transform: uppercase; letter-spacing: 5px; }
 
-/* Grid */
+
 .grid-container {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -180,7 +180,7 @@ body {
 }
 
 .grid-item {
-    background: #fde68a; /* Amarillo más oscuro para las cartas */
+    background: #fde68a; 
     border-radius: 20px;
     padding: 20px;
     text-align: center;
@@ -210,10 +210,10 @@ body {
     font-weight: 700;
 }
 
-/* Diferenciación de cartas */
+
 .grid-item.white-card { background: #f3d9e7; border-color: #fce7f3; }
 
-/* ESTADO ACTIVO */
+
 .grid-item.active {
     background: var(--accent-cyan);
     border-color: var(--accent-purple);
@@ -225,7 +225,7 @@ body {
 .grid-item.active img { transform: scale(1.2); }
 .grid-item.active .item-label { background: var(--accent-purple); color: var(--white); }
 
-/* Music Toggle */
+
 .music-toggle { 
     position: absolute; top: 20px; right: 20px; 
     background: var(--accent-purple); 

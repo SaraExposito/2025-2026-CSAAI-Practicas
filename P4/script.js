@@ -1,14 +1,13 @@
-// VARIABLES DE ESTADO GLOBAL
 let currentLevelIdx = 0;
 let currentPos = 0;
 let seconds = 0;
 
-// Referencias a intervalos (IMPORTANTES para poder detenerlos)
+
 let gameInterval = null; 
 let prepTimeout = null; 
 let timerInterval = null;
 
-// Referencias DOM
+
 const grid = document.getElementById('grid');
 const wordDisplay = document.getElementById('current-word');
 const roundDisplay = document.getElementById('current-round-display');
@@ -19,11 +18,11 @@ const btnStop = document.getElementById('btn-stop');
 const audio = document.getElementById('bg-music');
 
 const levels = [
-    { pattern: [1,1,1,1,0,0,0,0], speed: 1000 },
-    { pattern: [0,1,0,1,0,1,0,1], speed: 900 },
-    { pattern: [1,0,1,0,1,0,1,0], speed: 800 },
-    { pattern: [0,0,1,1,0,0,1,1], speed: 700 },
-    { pattern: [1,0,0,1,0,1,1,0], speed: 600 }
+    { pattern: [1,1,1,1,0,0,0,0], speed: 2000 },
+    { pattern: [0,1,0,1,0,1,0,1], speed: 1000 },
+    { pattern: [1,0,1,0,1,0,1,0], speed: 900 },
+    { pattern: [0,0,1,1,0,0,1,1], speed: 800 },
+    { pattern: [1,0,0,1,0,1,1,0], speed: 650 }
 ];
 
 function updateGrid() {
@@ -49,16 +48,13 @@ function updateGrid() {
 }
 
 function startGame() {
-    // Reset de variables
     currentLevelIdx = parseInt(document.getElementById('select-level').value) - 1;
     seconds = 0;
     labelTime.innerText = "0.0s";
     
-    // Bloquear controles
     toggleControls(true);
     labelStatus.innerText = "Jugando";
     
-    // Iniciar cronómetro real
     startTimer();
     runRound();
 }
@@ -70,7 +66,6 @@ function runRound() {
     wordDisplay.innerText = "¡PREPÁRATE!";
     updateGrid();
 
-    // Guardamos el timeout en una variable para poder cancelarlo
     prepTimeout = setTimeout(() => {
         currentPos = 0;
         gameInterval = setInterval(nextStep, levels[currentLevelIdx].speed);
@@ -94,25 +89,20 @@ function nextStep() {
     }
 }
 
-// FUNCIÓN DETENER (LA QUE NECESITABAS)
+// MODIFICADO: Ya no detiene la música al parar el juego
 function stopGame() {
-    // 1. Matar todos los procesos activos
     clearInterval(gameInterval);
     clearInterval(timerInterval);
     clearTimeout(prepTimeout);
 
-    // 2. Limpiar visualmente
     const items = document.querySelectorAll('.grid-item');
     items.forEach(it => it.classList.remove('active'));
     
     wordDisplay.innerText = "PULSA EMPEZAR";
     labelStatus.innerText = "En espera";
     
-    // 3. Detener música si suena
-    audio.pause();
-    audio.currentTime = 0;
+    // Se eliminan las líneas de audio.pause() para que la música sea independiente
 
-    // 4. Liberar controles
     toggleControls(false);
 }
 
@@ -123,7 +113,7 @@ function finishGame() {
 }
 
 function startTimer() {
-    clearInterval(timerInterval); // Seguridad
+    clearInterval(timerInterval);
     const startTime = Date.now();
     timerInterval = setInterval(() => {
         const delta = (Date.now() - startTime) / 1000;
@@ -138,21 +128,22 @@ function toggleControls(isPlaying) {
     document.getElementById('select-pack').disabled = isPlaying;
 }
 
-// ASIGNACIÓN DE EVENTOS
-btnStart.addEventListener('click', startGame);
-btnStop.addEventListener('click', stopGame); // Asegúrate de que el ID sea 'btn-stop' en el HTML
 
+btnStart.addEventListener('click', startGame);
+btnStop.addEventListener('click', stopGame); 
+
+// MODIFICADO: Control estricto de Bucle y Pausa
 document.getElementById('btn-music').onclick = () => {
     if (audio.paused) {
+        audio.loop = true; // Asegura que suene en bucle
         audio.play();
         document.getElementById('btn-music').innerText = "🎵 Música: ON";
     } else {
-        audio.pause();
+        audio.pause(); // Detiene la música
         document.getElementById('btn-music').innerText = "🎵 Música: OFF";
     }
 };
 
 document.getElementById('select-pack').onchange = updateGrid;
 
-// Carga inicial
 updateGrid();
