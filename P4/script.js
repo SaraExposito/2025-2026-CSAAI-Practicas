@@ -1,3 +1,4 @@
+/* jshint esversion: 6 */
 let currentLevelIdx = 0;
 let currentPos = 0;
 let seconds = 0;
@@ -144,7 +145,7 @@ document.getElementById('btn-music').onclick = () => {
 
 document.getElementById('select-pack').onchange = updateGrid;
 
-// Estado inicial del botón al cargar la página
+
 document.getElementById('btn-music').innerText = "🎵 Música: OFF";
 
 updateGrid();
