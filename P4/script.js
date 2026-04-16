@@ -2,11 +2,9 @@ let currentLevelIdx = 0;
 let currentPos = 0;
 let seconds = 0;
 
-
 let gameInterval = null; 
 let prepTimeout = null; 
 let timerInterval = null;
-
 
 const grid = document.getElementById('grid');
 const wordDisplay = document.getElementById('current-word');
@@ -54,12 +52,10 @@ function startGame() {
     toggleControls(true);
     labelStatus.innerText = "Jugando";
 
-    // MODIFICACIÓN: La música arranca automáticamente al empezar
-    if (audio.paused) {
-        audio.loop = true;
-        audio.play();
-        document.getElementById('btn-music').innerText = "🎵 Música: ON";
-    }
+   
+    audio.loop = true;
+    audio.play();
+    document.getElementById('btn-music').innerText = "🎵 Música: ON";
     
     startTimer();
     runRound();
@@ -106,7 +102,6 @@ function stopGame() {
     wordDisplay.innerText = "PULSA EMPEZAR";
     labelStatus.innerText = "En espera";
     
-    
     toggleControls(false);
 }
 
@@ -132,11 +127,10 @@ function toggleControls(isPlaying) {
     document.getElementById('select-pack').disabled = isPlaying;
 }
 
-
 btnStart.addEventListener('click', startGame);
 btnStop.addEventListener('click', stopGame); 
 
-// El botón manual sigue funcionando para silenciar si se desea
+
 document.getElementById('btn-music').onclick = () => {
     if (audio.paused) {
         audio.loop = true;
@@ -149,5 +143,8 @@ document.getElementById('btn-music').onclick = () => {
 };
 
 document.getElementById('select-pack').onchange = updateGrid;
+
+// Estado inicial del botón al cargar la página
+document.getElementById('btn-music').innerText = "🎵 Música: OFF";
 
 updateGrid();
