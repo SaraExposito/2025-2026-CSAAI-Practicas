@@ -43,6 +43,7 @@ body {
     background: linear-gradient(to right, var(--accent-cyan), var(--accent-purple));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .main-header p { margin: 5px 0 0; color: var(--text-dim); font-weight: 500; }
