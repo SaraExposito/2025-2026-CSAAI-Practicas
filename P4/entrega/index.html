@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beat The Word</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="app-wrapper">
+        <header class="main-header">
+            <div class="title-group">
+                <h1>BEAT THE WORD</h1>
+                <p>Sigue la secuencia al ritmo del Beat</p>
+            </div>
+            <div class="top-stats">
+                <div class="stat-box"><span class="label">Nivel</span><strong id="label-level">1/5</strong></div>
+                <div class="stat-box"><span class="label">Tiempo</span><strong id="label-time">0.0s</strong></div>
+                <div class="stat-box"><span class="label">Estado</span><strong id="label-status">En espera</strong></div>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <aside class="sidebar">
+                <div class="glass-card info-card">
+                    <h2>¿Cómo jugar?</h2>
+                    <p>SIGUE LA LUZ ⚡Di la palabra antes de que el foco se mueva al siguiente recuadro⚡</p>
+                </div>
+
+                <div class="glass-card config-card">
+                    <h3>Configuración</h3>
+                    <div class="field">
+                        <label>Secuencia</label>
+                        <select id="select-pack">
+                            <option value="rata-roca">Roca / Rata</option>
+                            <option value="niña-piña">Piña / Niña</option>
+                            <option value="pez-rex">Rex / Pez</option>
+                            <option value="bota-bola">Bola / Bota</option>
+                            <option value="bella-mella">Mella / Bella</option>
+                            <option value="cana-caña">Caña / Cana</option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label>Nivel inicial</label>
+                        <select id="select-level">
+                            <option value="1">Nivel 1</option>
+                            <option value="2">Nivel 2</option>
+                            <option value="3">Nivel 3</option>
+                            <option value="4">Nivel 4</option>
+                            <option value="5">Nivel 5</option>
+                        </select>
+                    </div>
+
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="show-titles" checked> 
+                        <label for="show-titles">Mostrar títulos</label>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button id="btn-start" class="btn-primary">EMPEZAR PARTIDA</button>
+                    <button id="btn-stop" class="btn-secondary" disabled>DETENER</button>
+                </div>
+            </aside>
+
+            <main class="game-area">
+                <div class="game-top-bar">
+                    <button id="btn-music" class="music-toggle">🎵 Música: OFF</button>
+                </div>
+
+                <div id="word-screen">
+                    <h2 id="current-round-display">1/5</h2>
+                    <div class="word-bubble">
+                        <p id="current-word">PULSA EMPEZAR</p>
+                    </div>
+                </div>
+
+                <div class="grid-container" id="grid">
+                    </div>
+            </main>
+        </div>
+    </div>
+
+    <audio id="bg-music" loop src="musica_fondo.mp3"></audio>
+    <script src="script.js"></script>
+</body>
+</html>
