@@ -2,66 +2,42 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Bot League - Fútbol 2D</title>
+    <title>Bot League - Arcade</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="game-container">
+    <div class="game-wrapper">
         <canvas id="gameCanvas" width="1000" height="600"></canvas>
         
-        <!-- Pantalla de inicio -->
+        <div class="ui-top">
+            <div id="scoreboard">0 - 0</div>
+            <div id="mode-label">Modo: Selecciona uno</div>
+        </div>
+
         <div id="startScreen" class="overlay active">
             <div class="menu-box">
-                <h1>⚽ BOT LEAGUE ⚽</h1>
-                <h2>Elige el modo de juego</h2>
-                <div class="mode-buttons">
-                    <button id="mode3Goles" class="mode-btn">Partido a 3 Goles</button>
-                    <button id="modeGoldenGoal" class="mode-btn">Gol de Oro</button>
+                <h1>⚽ BOT LEAGUE</h1>
+                <p>Elige tu modo de juego:</p>
+                <div class="btn-group">
+                    <button onclick="startGame('3goles')">PARTIDO A 3 GOLES</button>
+                    <button onclick="startGame('goldenGoal')">GOL DE ORO</button>
                 </div>
                 <div class="instructions">
-                    <p>🎮 Controles:</p>
-                    <p>Movimiento: WASD o ⬆️⬇️⬅️➡️</p>
-                    <p>Disparo: Mueve el ratón para apuntar (línea guía) y haz clic</p>
-                    <p>⚽ ¡Presiona a los bots y mete goles!</p>
+                    Mover: Flechas | Girar: A/D | Chutar: Espacio
                 </div>
             </div>
         </div>
 
-        <!-- Pantalla de fin de partida -->
+        <div id="countdown" class="countdown"></div>
+        <div id="goalMessage" class="goal-overlay">¡GOOOL!</div>
+
         <div id="endScreen" class="overlay">
             <div class="menu-box">
-                <h2 id="endMessage">¡FIN DEL PARTIDO!</h2>
-                <p id="endResult"></p>
-                <div class="end-buttons">
-                    <button id="restartBtn">🔄 Jugar de nuevo</button>
-                    <button id="menuBtn">🏠 Volver al menú</button>
-                </div>
+                <h2 id="endResult">¡FIN DEL PARTIDO!</h2>
+                <button onclick="location.reload()">VOLVER AL MENÚ</button>
             </div>
         </div>
-
-        <!-- Mensaje de gol -->
-        <div id="goalMessage" class="goal-message">¡GOOOL!</div>
-        
-        <!-- Cuenta atrás -->
-        <div id="countdown" class="countdown">3</div>
-        
-        <!-- Marcador -->
-        <div class="scoreboard">
-            <div class="score team-left">
-                <span class="team-name">JUGADOR</span>
-                <span id="playerScore">0</span>
-            </div>
-            <div class="score team-right">
-                <span class="team-name">RIVALES</span>
-                <span id="botScore">0</span>
-            </div>
-        </div>
-
-        <!-- Indicador de modo -->
-        <div id="modeIndicator" class="mode-indicator">Modo: 3 Goles</div>
     </div>
-
     <script src="script.js"></script>
 </body>
 </html>
