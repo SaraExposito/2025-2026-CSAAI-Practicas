@@ -1,0 +1,256 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    user-select: none;
+}
+
+body {
+    background: linear-gradient(135deg, #1a472a, #0e2a1a);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Segoe UI', 'Arial', sans-serif;
+    padding: 20px;
+}
+
+.game-container {
+    position: relative;
+    display: inline-block;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+canvas {
+    display: block;
+    background-color: #2e7d32;
+    cursor: crosshair;
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+}
+
+/* Superposiciones comunes */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    backdrop-filter: blur(3px);
+    transition: all 0.3s ease;
+}
+
+.overlay:not(.active) {
+    display: none;
+}
+
+.menu-box {
+    background: linear-gradient(145deg, #f5f5dc, #e8e0c0);
+    padding: 30px 40px;
+    border-radius: 60px 60px 40px 40px;
+    text-align: center;
+    box-shadow: 0 15px 25px rgba(0,0,0,0.5);
+    border: 3px solid #ffd966;
+    min-width: 280px;
+}
+
+.menu-box h1 {
+    color: #1a3c1a;
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 0 #ffd966;
+}
+
+.menu-box h2 {
+    color: #2c5a2c;
+    margin-bottom: 20px;
+    font-size: 1.4rem;
+}
+
+.mode-buttons, .end-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
+
+.mode-btn, .end-buttons button {
+    background: #ffd966;
+    border: none;
+    padding: 12px 24px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 40px;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.2s;
+    color: #1e3a1e;
+    font-family: inherit;
+    box-shadow: 0 4px 0 #b97f10;
+}
+
+.mode-btn:hover, .end-buttons button:hover {
+    transform: translateY(-2px);
+    background: #ffe08c;
+}
+
+.mode-btn:active, .end-buttons button:active {
+    transform: translateY(2px);
+    box-shadow: 0 1px 0 #b97f10;
+}
+
+.instructions {
+    margin-top: 20px;
+    font-size: 0.85rem;
+    color: #2c3e2c;
+    background: #f0eac8;
+    padding: 12px;
+    border-radius: 20px;
+    text-align: left;
+}
+
+.instructions p {
+    margin: 5px 0;
+}
+
+/* Marcador */
+.scoreboard {
+    position: absolute;
+    top: 15px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 40px;
+    pointer-events: none;
+    z-index: 5;
+}
+
+.score {
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(5px);
+    padding: 8px 20px;
+    border-radius: 40px;
+    color: white;
+    font-weight: bold;
+    font-size: 1.8rem;
+    text-align: center;
+    border: 2px solid gold;
+    min-width: 140px;
+}
+
+.team-name {
+    display: block;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    color: #ffd966;
+}
+
+.mode-indicator {
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    background: rgba(0,0,0,0.6);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    z-index: 5;
+    pointer-events: none;
+}
+
+/* Mensaje de gol */
+.goal-message {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, gold, #ffaa00);
+    color: darkgreen;
+    font-size: 3rem;
+    font-weight: bold;
+    padding: 20px 40px;
+    border-radius: 80px;
+    white-space: nowrap;
+    z-index: 20;
+    opacity: 0;
+    transition: opacity 0.2s;
+    pointer-events: none;
+    text-shadow: 3px 3px 0 white;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    border: 2px solid white;
+}
+
+.goal-message.show {
+    opacity: 1;
+    animation: goalPop 1s ease-out forwards;
+}
+
+@keyframes goalPop {
+    0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
+    20% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+    80% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+    100% { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
+}
+
+/* Cuenta atrás */
+.countdown {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 5rem;
+    font-weight: bold;
+    color: white;
+    text-shadow: 4px 4px 0 black;
+    background: rgba(0,0,0,0.7);
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    z-index: 15;
+    font-family: monospace;
+    opacity: 0;
+    transition: opacity 0.1s;
+    pointer-events: none;
+}
+
+.countdown.show {
+    opacity: 1;
+}
+
+/* Responsive */
+@media (max-width: 1100px) {
+    .game-container canvas {
+        width: 100%;
+        height: auto;
+    }
+    .score {
+        font-size: 1.2rem;
+        padding: 4px 12px;
+        min-width: 100px;
+    }
+    .goal-message {
+        font-size: 2rem;
+        padding: 12px 24px;
+    }
+    .menu-box {
+        padding: 20px;
+        margin: 20px;
+    }
+    .mode-btn {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+    }
+}
