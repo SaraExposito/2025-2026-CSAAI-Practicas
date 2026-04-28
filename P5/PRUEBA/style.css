@@ -1,6 +1,5 @@
 body {
     margin: 0;
-    /* Usamos la imagen también como fondo de la página para que no haya bordes negros */
     background: url('fondo.jpg') no-repeat center center fixed;
     background-size: cover;
     color: white;
@@ -21,7 +20,6 @@ body {
 }
 
 canvas { 
-    /* El fondo se dibuja en JS, así que aquí lo dejamos transparente */
     background-color: transparent;
     display: block; 
 }
@@ -35,25 +33,34 @@ canvas {
     pointer-events: none;
 }
 
+/* MARCADOR MÁS LLAMATIVO */
 #scoreboard { 
-    font-size: 4rem; 
+    font-size: 5rem; 
     font-weight: 900;
-    text-shadow: 3px 3px 5px #000;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 4px 4px 0px #000;
+    animation: scorePulse 2s infinite alternate;
+}
+
+@keyframes scorePulse {
+    from { transform: scale(1); opacity: 0.9; }
+    to { transform: scale(1.05); opacity: 1; text-shadow: 0 0 30px #fff; }
 }
 
 #mode-label { 
-    background: rgba(0, 0, 0, 0.7);
-    padding: 5px 15px;
-    border-radius: 15px;
-    font-size: 0.8rem;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 0.9rem;
     display: inline-block;
+    border: 1px solid #cb3524;
+    letter-spacing: 2px;
 }
 
 .overlay {
     position: absolute;
     inset: 0;
-    background: rgba(0,0,0,0.6); /* Un poco más claro para ver el fondo */
-    backdrop-filter: blur(8px); /* Efecto de desenfoque muy moderno */
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(10px);
     display: none;
     flex-direction: column;
     justify-content: center;
@@ -63,47 +70,45 @@ canvas {
 .overlay.active { display: flex; }
 
 .menu-box {
-    background: rgba(34, 34, 34, 0.9);
+    background: rgba(20, 20, 20, 0.95);
     padding: 40px;
     border: 4px solid #cb3524;
     text-align: center;
-    border-radius: 20px;
-    box-shadow: 0 0 30px rgba(0,0,0,0.5);
+    border-radius: 30px;
+    box-shadow: 0 0 40px #cb3524;
 }
 
 .btn-group button {
     background: #cb3524;
     color: white;
     border: none;
-    padding: 15px 25px;
+    padding: 15px 30px;
     margin: 10px;
-    font-size: 1rem;
+    font-size: 1.1rem;
     font-weight: bold;
     cursor: pointer;
-    border-radius: 5px;
-    transition: 0.2s;
+    border-radius: 10px;
+    transition: 0.3s;
+    text-transform: uppercase;
 }
 
-.btn-group button:hover { transform: scale(1.1); background: #ff4d3a; }
-
-.countdown {
-    position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 10rem;
-    font-weight: 900;
-    color: #ffd700;
-    text-shadow: 5px 5px 10px #000;
-    pointer-events: none;
+.btn-group button:hover { 
+    transform: translateY(-5px); 
+    background: #ff4d3a; 
+    box-shadow: 0 10px 20px rgba(255, 77, 58, 0.4);
 }
 
 .goal-overlay {
     position: absolute;
-    top: 50%; left: 50%;
+    top: 50%;
+    left: 50%;
     transform: translate(-50%, -50%) scale(0);
-    font-size: 6rem;
+    font-size: 8rem;
     font-weight: 900;
-    text-shadow: 4px 4px 10px rgba(0,0,0,0.5);
-    transition: 0.4s cubic-bezier(0.17, 0.89, 0.32, 1.49);
+    color: #ffd700;
+    text-shadow: 0 0 50px #ff0000;
+    transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    pointer-events: none;
+    z-index: 20;
 }
 .goal-overlay.show { transform: translate(-50%, -50%) scale(1); }
