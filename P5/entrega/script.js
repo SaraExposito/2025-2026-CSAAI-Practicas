@@ -1,7 +1,7 @@
 /* jshint esversion: 6 */
+
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
-
 
 const stadiumImg = new Image();
 stadiumImg.src = 'fondo.jpg';
@@ -11,7 +11,6 @@ atletiImg.src = 'atletico-de-madrid.png';
 
 const realImg = new Image();
 realImg.src = 'real-madrid.png';
-
 
 const W = 1000, H = 600, MARGIN = 40, GOAL_SIZE = 160;
 
@@ -36,13 +35,13 @@ let bots = [
 function update() {
     if (!state.running || state.paused) return;
 
-    if (state.keys['ArrowUp']) player.y -= 5;
-    if (state.keys['ArrowDown']) player.y += 5;
-    if (state.keys['ArrowLeft']) player.x -= 5;
-    if (state.keys['ArrowRight']) player.x += 5;
-    if (state.keys['KeyA']) player.angle -= 0.1;
-    if (state.keys['KeyD']) player.angle += 0.1;
-    if (state.keys['Space']) shoot(player);
+    if (state.keys.ArrowUp) player.y -= 5;
+    if (state.keys.ArrowDown) player.y += 5;
+    if (state.keys.ArrowLeft) player.x -= 5;
+    if (state.keys.ArrowRight) player.x += 5;
+    if (state.keys.KeyA) player.angle -= 0.1;
+    if (state.keys.KeyD) player.angle += 0.1;
+    if (state.keys.Space) shoot(player);
 
     let allPlayers = [player, partner, ...bots];
 
@@ -129,12 +128,9 @@ function shoot(e) {
 
 function draw() {
     ctx.clearRect(0, 0, W, H);
-    
-   
     ctx.drawImage(stadiumImg, 0, 0, W, H);
     ctx.fillStyle = "rgba(46, 125, 50, 0.3)";
     ctx.fillRect(0, 0, W, H);
-    
     
     ctx.strokeStyle = "rgba(255, 255, 255, 0.8)"; 
     ctx.lineWidth = 3;
@@ -142,40 +138,33 @@ function draw() {
     ctx.beginPath(); ctx.moveTo(W/2, MARGIN); ctx.lineTo(W/2, H - MARGIN); ctx.stroke();
     ctx.beginPath(); ctx.arc(W/2, H/2, 80, 0, Math.PI*2); ctx.stroke();
 
-    
     const drawGoal = (x, side) => {
         const goalTop = H/2 - GOAL_SIZE/2;
         const netDepth = 30;
         const isLeft = side === 'left';
 
-        
         ctx.strokeStyle = "rgba(255, 255, 255, 0.4)";
         ctx.lineWidth = 1;
         ctx.beginPath();
         for (let i = 0; i <= GOAL_SIZE; i += 10) {
-            // Líneas horizontales de la red
             ctx.moveTo(x, goalTop + i);
             ctx.lineTo(isLeft ? x - netDepth : x + netDepth, goalTop + i);
         }
         for (let i = 0; i <= netDepth; i += 10) {
-            // Líneas verticales de la red
             ctx.moveTo(isLeft ? x - i : x + i, goalTop);
             ctx.lineTo(isLeft ? x - i : x + i, goalTop + GOAL_SIZE);
         }
         ctx.stroke();
 
-        
         ctx.strokeStyle = "#ffffff";
         ctx.lineWidth = 6;
         ctx.lineJoin = "round";
         ctx.lineCap = "round";
         ctx.beginPath();
-        // Poste superior - larguero - poste inferior
         ctx.moveTo(x, goalTop);
         ctx.lineTo(x, goalTop + GOAL_SIZE);
         ctx.stroke();
 
-       
         ctx.strokeStyle = "#e0e0e0";
         ctx.lineWidth = 2;
         ctx.beginPath();
@@ -186,9 +175,7 @@ function draw() {
 
     drawGoal(MARGIN, 'left');
     drawGoal(W - MARGIN, 'right');
-  
 
-   
     [player, partner, ...bots].forEach(e => {
         ctx.save();
         ctx.translate(e.x, e.y);
@@ -211,15 +198,15 @@ function draw() {
         ctx.restore();
     });
 
-   
     ctx.fillStyle = "white";
     ctx.beginPath(); ctx.arc(ball.x, ball.y, ball.r, 0, Math.PI*2); ctx.fill();
     ctx.strokeStyle = "black"; ctx.lineWidth = 1; ctx.stroke();
 }
 
-
-
-function startGame(mode) {
+/**
+ * Inicia el juego. Se expone globalmente para ser llamada desde el HTML.
+ */
+window.startGame = function(mode) {
     state.mode = mode;
     state.running = true;
     state.playerScore = 0;
@@ -228,11 +215,15 @@ function startGame(mode) {
     document.getElementById('mode-label').innerText = "MODO: " + (mode === '3goles' ? "A 3 GOLES" : "GOL DE ORO");
     document.getElementById('startScreen').classList.remove('active');
     resetPositions();
-}
+};
 
 function score(team) {
     state.paused = true;
-    team === 'player' ? state.playerScore++ : state.botScore++;
+    if (team === 'player') {
+        state.playerScore++;
+    } else {
+        state.botScore++;
+    }
     document.getElementById('scoreboard').innerText = `${state.playerScore} - ${state.botScore}`;
     let msg = document.getElementById('goalMessage');
     msg.innerText = team === 'player' ? "¡GOOOL DEL ATLETI!" : "¡GOL DEL MADRID!";
@@ -277,8 +268,8 @@ function resetPositions() {
     }, 700);
 }
 
-window.addEventListener('keydown', e => state.keys[e.code] = true);
-window.addEventListener('keyup', e => state.keys[e.code] = false);
+window.addEventListener('keydown', e => { state.keys[e.code] = true; });
+window.addEventListener('keyup', e => { state.keys[e.code] = false; });
 
 function loop() {
     update();
