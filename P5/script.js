@@ -1,7 +1,8 @@
+/* jshint esversion: 6 */
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 
-// --- CARGA DE IMÁGENES ---
+
 const stadiumImg = new Image();
 stadiumImg.src = 'fondo.jpg';
 
@@ -10,7 +11,7 @@ atletiImg.src = 'atletico-de-madrid.png';
 
 const realImg = new Image();
 realImg.src = 'real-madrid.png';
-// -------------------------
+
 
 const W = 1000, H = 600, MARGIN = 40, GOAL_SIZE = 160;
 
@@ -24,7 +25,7 @@ let state = {
 };
 
 let ball = { x: W/2, y: H/2, vx: 0, vy: 0, r: 10 };
-// El color se mantiene como "fallback" por si la imagen tarda en cargar
+
 let player = { x: 200, y: H/2, r: 22, color: '#2b58ad', angle: 0, team: 'blue', role: 'user' }; 
 let partner = { x: 300, y: 450, r: 22, color: '#4da6c9', angle: 0, team: 'blue', role: 'defender' }; 
 let bots = [
@@ -129,10 +130,11 @@ function shoot(e) {
 function draw() {
     ctx.clearRect(0, 0, W, H);
     
+   
     ctx.drawImage(stadiumImg, 0, 0, W, H);
-    
     ctx.fillStyle = "rgba(46, 125, 50, 0.3)";
     ctx.fillRect(0, 0, W, H);
+    
     
     ctx.strokeStyle = "rgba(255, 255, 255, 0.8)"; 
     ctx.lineWidth = 3;
@@ -140,30 +142,67 @@ function draw() {
     ctx.beginPath(); ctx.moveTo(W/2, MARGIN); ctx.lineTo(W/2, H - MARGIN); ctx.stroke();
     ctx.beginPath(); ctx.arc(W/2, H/2, 80, 0, Math.PI*2); ctx.stroke();
 
-    ctx.fillStyle = "#fff";
-    ctx.fillRect(MARGIN - 5, H/2 - GOAL_SIZE/2, 5, GOAL_SIZE);
-    ctx.fillRect(W - MARGIN, H/2 - GOAL_SIZE/2, 5, GOAL_SIZE);
+    
+    const drawGoal = (x, side) => {
+        const goalTop = H/2 - GOAL_SIZE/2;
+        const netDepth = 30;
+        const isLeft = side === 'left';
 
-    // --- DIBUJO DE JUGADORES CON ESCUDOS ---
+        
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.4)";
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        for (let i = 0; i <= GOAL_SIZE; i += 10) {
+            // Líneas horizontales de la red
+            ctx.moveTo(x, goalTop + i);
+            ctx.lineTo(isLeft ? x - netDepth : x + netDepth, goalTop + i);
+        }
+        for (let i = 0; i <= netDepth; i += 10) {
+            // Líneas verticales de la red
+            ctx.moveTo(isLeft ? x - i : x + i, goalTop);
+            ctx.lineTo(isLeft ? x - i : x + i, goalTop + GOAL_SIZE);
+        }
+        ctx.stroke();
+
+        
+        ctx.strokeStyle = "#ffffff";
+        ctx.lineWidth = 6;
+        ctx.lineJoin = "round";
+        ctx.lineCap = "round";
+        ctx.beginPath();
+        // Poste superior - larguero - poste inferior
+        ctx.moveTo(x, goalTop);
+        ctx.lineTo(x, goalTop + GOAL_SIZE);
+        ctx.stroke();
+
+       
+        ctx.strokeStyle = "#e0e0e0";
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(isLeft ? x - 2 : x + 2, goalTop);
+        ctx.lineTo(isLeft ? x - 2 : x + 2, goalTop + GOAL_SIZE);
+        ctx.stroke();
+    };
+
+    drawGoal(MARGIN, 'left');
+    drawGoal(W - MARGIN, 'right');
+  
+
+   
     [player, partner, ...bots].forEach(e => {
         ctx.save();
         ctx.translate(e.x, e.y);
         ctx.rotate(e.angle);
         
-        // Seleccionar imagen según equipo
         let img = e.team === 'blue' ? atletiImg : realImg;
         
-        // Dibujamos el escudo (centrado en la posición del jugador)
-        // Usamos el radio (e.r) para escalar la imagen proporcionalmente
         if (img.complete) {
             ctx.drawImage(img, -e.r, -e.r, e.r * 2, e.r * 2);
         } else {
-            // Círculo de seguridad si la imagen no ha cargado
             ctx.fillStyle = e.color;
             ctx.beginPath(); ctx.arc(0, 0, e.r, 0, Math.PI*2); ctx.fill();
         }
 
-        // Indicador de dirección (frente al escudo)
         ctx.fillStyle = "yellow";
         ctx.beginPath();
         ctx.moveTo(e.r, -5); ctx.lineTo(e.r + 12, 0); ctx.lineTo(e.r, 5);
@@ -172,12 +211,13 @@ function draw() {
         ctx.restore();
     });
 
+   
     ctx.fillStyle = "white";
     ctx.beginPath(); ctx.arc(ball.x, ball.y, ball.r, 0, Math.PI*2); ctx.fill();
     ctx.strokeStyle = "black"; ctx.lineWidth = 1; ctx.stroke();
 }
 
-// ... (Resto de funciones startGame, score, checkWin, resetPositions, loop igual que antes)
+
 
 function startGame(mode) {
     state.mode = mode;
@@ -211,7 +251,7 @@ function checkWin() {
     if (won) {
         state.running = false;
         document.getElementById('endScreen').classList.add('active');
-        document.getElementById('endResult').innerText = state.playerScore > state.botScore ? "¡EL ATLETI REINA EN MADRID!" : "VICTORIA BLANCA";
+        document.getElementById('endResult').innerText = state.playerScore > state.botScore ? "¡AÚPA ATLETIIII!" : "VICTORIA BLANCA";
     }
     return won;
 }

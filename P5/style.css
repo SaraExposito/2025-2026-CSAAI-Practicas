@@ -1,6 +1,5 @@
 body {
     margin: 0;
-    /* Usamos la imagen también como fondo de la página para que no haya bordes negros */
     background: url('fondo.jpg') no-repeat center center fixed;
     background-size: cover;
     color: white;
@@ -21,7 +20,6 @@ body {
 }
 
 canvas { 
-    /* El fondo se dibuja en JS, así que aquí lo dejamos transparente */
     background-color: transparent;
     display: block; 
 }
@@ -52,8 +50,8 @@ canvas {
 .overlay {
     position: absolute;
     inset: 0;
-    background: rgba(0,0,0,0.6); /* Un poco más claro para ver el fondo */
-    backdrop-filter: blur(8px); /* Efecto de desenfoque muy moderno */
+    background: rgba(0,0,0,0.6); 
+    backdrop-filter: blur(8px);
     display: none;
     flex-direction: column;
     justify-content: center;
